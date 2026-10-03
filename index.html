@@ -1,0 +1,1055 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101828">
+  <meta name="description" content="Nexora, la plateforme de gestion qui simplifie le suivi de vos stocks, de vos ventes et de votre activité.">
+  <title>Nexora — La maîtrise de votre gestion</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/global.css">
+
+  <style>
+    :root {
+      --navy: #101828;
+      --navy-light: #19263a;
+      --gold: #c9a96e;
+      --gold-light: #e4d1a9;
+      --white: #fff;
+      --muted: #a7b0c0;
+      --surface: #f4f6f9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--navy);
+      background: var(--white);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* NAVIGATION */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(16, 24, 40, .97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: white;
+      font-family: "Manrope", sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -.8px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(201,169,110,.6);
+      border-radius: 11px;
+      color: var(--gold);
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .brand span:last-child {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      color: #c5cbd5;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .login-link {
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s, background .2s, border-color .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      color: #101828;
+      background: var(--gold);
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+    }
+
+    .btn-outline {
+      color: white;
+      border-color: rgba(255,255,255,.28);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      color: white;
+      background: transparent;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background:
+        radial-gradient(ellipse at 80% 45%, rgba(201,169,110,.12), transparent 40%),
+        linear-gradient(125deg, #101828 0%, #142138 65%, #1b293d 100%);
+    }
+
+    .hero::before {
+      position: absolute;
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      opacity: .12;
+      background-image: radial-gradient(#c9a96e 0.7px, transparent .7px);
+      background-size: 25px 25px;
+      mask-image: linear-gradient(to right, transparent, black);
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 55px;
+      min-height: 590px;
+      padding-top: 60px;
+      padding-bottom: 70px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      max-width: 610px;
+      margin: 23px 0;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(38px, 5vw, 62px);
+      line-height: 1.12;
+      letter-spacing: -2.5px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero-description {
+      max-width: 510px;
+      color: #bdc5d1;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .hero-note {
+      margin-top: 22px;
+      color: #aab4c3;
+      font-size: 12px;
+    }
+
+    /* APERÇU DU TABLEAU DE BORD */
+
+    .dashboard-preview {
+      position: relative;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 17px;
+      background: rgba(255,255,255,.07);
+      box-shadow: 0 30px 90px rgba(0,0,0,.35);
+      backdrop-filter: blur(14px);
+      transform: perspective(1100px) rotateY(-5deg) rotateX(2deg);
+    }
+
+    .preview-window {
+      overflow: hidden;
+      border-radius: 10px;
+      color: var(--navy);
+      background: #f6f7fa;
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 17px;
+      border-bottom: 1px solid #e9ebef;
+      background: white;
+    }
+
+    .preview-logo {
+      font-family: "Manrope", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .preview-logo span {
+      color: #b38c4b;
+    }
+
+    .preview-avatar {
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: #19263a;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .preview-content {
+      padding: 18px;
+    }
+
+    .preview-heading {
+      margin-bottom: 14px;
+      font-family: "Manrope", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .preview-subtitle {
+      margin-top: 4px;
+      color: #7b8493;
+      font-size: 10px;
+    }
+
+    .preview-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .preview-stat {
+      padding: 12px 10px;
+      border: 1px solid #e8eaf0;
+      border-radius: 8px;
+      background: white;
+    }
+
+    .preview-stat small {
+      display: block;
+      color: #7b8493;
+      font-size: 9px;
+    }
+
+    .preview-stat strong {
+      display: block;
+      margin-top: 8px;
+      font-family: "Manrope", sans-serif;
+      font-size: 20px;
+    }
+
+    .preview-stat em {
+      display: block;
+      margin-top: 4px;
+      color: #16834a;
+      font-size: 9px;
+      font-style: normal;
+    }
+
+    .preview-lower {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .preview-panel {
+      min-height: 150px;
+      padding: 12px;
+      border: 1px solid #e8eaf0;
+      border-radius: 8px;
+      background: white;
+    }
+
+    .preview-panel-title {
+      margin-bottom: 14px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .chart {
+      height: 90px;
+      display: flex;
+      align-items: end;
+      justify-content: space-around;
+      gap: 9px;
+      padding: 0 4px;
+      border-bottom: 1px solid #e9ebef;
+    }
+
+    .chart-bar {
+      width: 12%;
+      min-height: 10px;
+      border-radius: 4px 4px 0 0;
+      background: #d9c49b;
+    }
+
+    .chart-bar:nth-child(2n) {
+      background: #b38c4b;
+    }
+
+    .preview-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 12px 0;
+      font-size: 9px;
+    }
+
+    .preview-tag {
+      padding: 4px 7px;
+      border-radius: 20px;
+      color: #15803d;
+      background: #e7f5eb;
+      font-size: 8px;
+    }
+
+    /* AVANTAGES */
+
+    .section {
+      padding: 92px 0;
+    }
+
+    .section-heading {
+      max-width: 670px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .section-heading .eyebrow {
+      color: #9c773e;
+    }
+
+    .section-heading h2 {
+      margin: 15px 0;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -1.3px;
+    }
+
+    .section-heading p {
+      color: #687386;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature-card {
+      padding: 28px;
+      border: 1px solid #e8ebf0;
+      border-radius: 13px;
+      background: white;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: #d8c29b;
+      box-shadow: 0 15px 35px rgba(16,24,40,.07);
+    }
+
+    .feature-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #a77e3e;
+      background: #f6f0e5;
+      font-size: 21px;
+    }
+
+    .feature-card h3 {
+      margin: 20px 0 10px;
+      font-family: "Manrope", sans-serif;
+      font-size: 17px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: #687386;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* BANDEAU */
+
+    .cta {
+      padding: 0 0 90px;
+    }
+
+    .cta-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      padding: 38px 42px;
+      border-radius: 16px;
+      color: white;
+      background: linear-gradient(120deg, #101828, #1c2c44);
+    }
+
+    .cta-box h2 {
+      margin: 0 0 8px;
+      font-family: "Manrope", sans-serif;
+      font-size: 25px;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: #b9c2cf;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+
+    footer {
+      color: #d1d6df;
+      background: #0b1220;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 45px;
+      padding: 55px 0 40px;
+    }
+
+    .footer-brand p {
+      max-width: 300px;
+      color: #929cac;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer-column h3 {
+      margin: 0 0 18px;
+      color: white;
+      font-size: 13px;
+    }
+
+    .footer-column a {
+      display: block;
+      margin: 12px 0;
+      color: #929cac;
+      font-size: 12px;
+    }
+
+    .footer-column a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,.1);
+      color: #8791a2;
+      font-size: 11px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .nav-links {
+        gap: 16px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        padding-top: 65px;
+      }
+
+      .hero-copy {
+        max-width: 650px;
+      }
+
+      .dashboard-preview {
+        max-width: 600px;
+        width: 100%;
+        margin: auto;
+        transform: none;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 32px, 1160px);
+      }
+
+      .nav-inner {
+        min-height: 66px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 66px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 16px 18px;
+        border-bottom: 1px solid rgba(255,255,255,.1);
+        background: #101828;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 13px 5px;
+      }
+
+      .nav-actions {
+        gap: 10px;
+      }
+
+      .nav-actions .login-link {
+        display: none;
+      }
+
+      .nav-actions .btn {
+        min-height: 38px;
+        padding: 0 12px;
+        font-size: 12px;
+      }
+
+      .hero-inner {
+        min-height: 0;
+        padding-top: 65px;
+        padding-bottom: 60px;
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 10vw, 49px);
+        letter-spacing: -1.8px;
+      }
+
+      .hero-description {
+        font-size: 14px;
+      }
+
+      .preview-content {
+        padding: 12px;
+      }
+
+      .preview-stat {
+        padding: 9px 7px;
+      }
+
+      .preview-stat strong {
+        font-size: 16px;
+      }
+
+      .preview-lower {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-panel {
+        min-height: 125px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .cta {
+        padding-bottom: 65px;
+      }
+
+      .cta-box {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 28px 23px;
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="container nav-inner">
+
+      <a href="index.html" class="brand" aria-label="Nexora, accueil">
+        <span class="brand-mark">N</span>
+        <span>NEX<span>ORA</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
+        <a href="#accueil">Accueil</a>
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#apropos">À propos</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="connexion.html" class="login-link">Connexion</a>
+        <a href="inscription.html" class="btn btn-gold">Commencer</a>
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >☰</button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="accueil">
+      <div class="container hero-inner">
+
+        <div class="hero-copy">
+          <span class="eyebrow">Gestion intelligente</span>
+
+          <h1>
+            Prenez le contrôle de votre
+            <span>entreprise.</span>
+          </h1>
+
+          <p class="hero-description">
+            Stocks, ventes, achats et performances :
+            centralisez la gestion de votre activité dans
+            une seule plateforme, pensée pour vous faire
+            gagner du temps.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="inscription.html" class="btn btn-gold">
+              Découvrir Nexora <span aria-hidden="true">→</span>
+            </a>
+            <a href="#fonctionnalites" class="btn btn-outline">
+              Explorer les fonctionnalités
+            </a>
+          </div>
+
+          <p class="hero-note">
+            Une solution conçue pour accompagner les entreprises
+            de toutes tailles.
+          </p>
+        </div>
+
+        <!-- APERÇU VISUEL -->
+        <div class="dashboard-preview" aria-label="Aperçu illustratif du tableau de bord Nexora">
+          <div class="preview-window">
+
+            <div class="preview-top">
+              <div class="preview-logo">NEX<span>ORA</span></div>
+              <div class="preview-avatar">NK</div>
+            </div>
+
+            <div class="preview-content">
+              <div class="preview-heading">
+                Tableau de bord
+                <div class="preview-subtitle">Vue générale de votre activité</div>
+              </div>
+
+              <div class="preview-stats">
+                <div class="preview-stat">
+                  <small>Produits</small>
+                  <strong>248</strong>
+                  <em>Exemple</em>
+                </div>
+                <div class="preview-stat">
+                  <small>Ventes</small>
+                  <strong>126</strong>
+                  <em>Exemple</em>
+                </div>
+                <div class="preview-stat">
+                  <small>Stock</small>
+                  <strong>89%</strong>
+                  <em>Exemple</em>
+                </div>
+              </div>
+
+              <div class="preview-lower">
+                <div class="preview-panel">
+                  <div class="preview-panel-title">Activité récente</div>
+                  <div class="chart" aria-hidden="true">
+                    <div class="chart-bar" style="height:35%"></div>
+                    <div class="chart-bar" style="height:55%"></div>
+                    <div class="chart-bar" style="height:42%"></div>
+                    <div class="chart-bar" style="height:75%"></div>
+                    <div class="chart-bar" style="height:62%"></div>
+                    <div class="chart-bar" style="height:90%"></div>
+                    <div class="chart-bar" style="height:70%"></div>
+                  </div>
+                </div>
+
+                <div class="preview-panel">
+                  <div class="preview-panel-title">Dernières opérations</div>
+                  <div class="preview-row">
+                    <span>Vente</span>
+                    <span class="preview-tag">Validée</span>
+                  </div>
+                  <div class="preview-row">
+                    <span>Entrée stock</span>
+                    <span class="preview-tag">Validée</span>
+                  </div>
+                  <div class="preview-row">
+                    <span>Inventaire</span>
+                    <span class="preview-tag">Validé</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FONCTIONNALITÉS -->
+    <section class="section" id="fonctionnalites">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Une plateforme complète</span>
+          <h2>Toute votre gestion, au même endroit.</h2>
+          <p>
+            Nexora est conçu pour réunir les outils essentiels
+            de votre activité dans une interface claire et
+            accessible.
+          </p>
+        </div>
+
+        <div class="features">
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">▤</div>
+            <h3>Gestion des stocks</h3>
+            <p>
+              Suivez les entrées, les sorties et les niveaux
+              de stock de vos produits depuis un espace centralisé.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">↗</div>
+            <h3>Suivi des ventes</h3>
+            <p>
+              Enregistrez vos opérations et consultez
+              les informations essentielles de vos ventes.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">▥</div>
+            <h3>Rapports et analyses</h3>
+            <p>
+              Consultez des indicateurs et des rapports pour
+              mieux comprendre votre activité.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">◷</div>
+            <h3>Historique des opérations</h3>
+            <p>
+              Retrouvez les mouvements enregistrés et
+              facilitez le suivi de vos opérations.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">♧</div>
+            <h3>Gestion des équipes</h3>
+            <p>
+              Organisez les accès de vos collaborateurs
+              selon leurs responsabilités.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">◇</div>
+            <h3>Gestion centralisée</h3>
+            <p>
+              Retrouvez les informations de votre entreprise
+              dans une interface conçue pour évoluer avec vous.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section class="section" id="apropos" style="background:#f4f6f9">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Notre vision</span>
+          <h2>Une gestion plus claire. Des décisions mieux informées.</h2>
+          <p>
+            Nexora ambitionne de rendre les outils de gestion
+            plus accessibles aux entreprises, quelle que soit
+            leur taille ou leur activité.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Prêt à découvrir Nexora ?</h2>
+            <p>
+              Créez votre espace et découvrez les possibilités
+              de la plateforme.
+            </p>
+          </div>
+          <a href="inscription.html" class="btn btn-gold">
+            Créer mon espace →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <span class="brand-mark">N</span>
+            <span>NEX<span>ORA</span></span>
+          </a>
+          <p>
+            La maîtrise de votre gestion.
+            Une plateforme conçue pour accompagner
+            votre entreprise.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Plateforme</h3>
+          <a href="#fonctionnalites">Fonctionnalités</a>
+          <a href="connexion.html">Connexion</a>
+          <a href="inscription.html">Inscription</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Informations</h3>
+          <a href="legal/confidentialite.html">Confidentialité</a>
+          <a href="legal/conditions-utilisation.html">Conditions d'utilisation</a>
+          <a href="legal/cookies.html">Politique des cookies</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Nexora. Tous droits réservés.</span>
+        <span>La maîtrise de votre gestion.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Menu mobile
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Fermer le menu" : "Ouvrir le menu"
+      );
+      menuToggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    // Fermeture du menu après navigation
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    // Année automatique
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+  </script>
+<script type="module" src="js/config/test-supabase.js"></script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101828">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Connectez-vous à votre espace Nexora.">
+
+  <title>Connexion — Nexora</title>
+
+  <!-- Polices -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Feuilles de style -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body class="auth-page">
+
+  <main class="auth-layout">
+
+    <!-- ==================================
+         PANNEAU DE PRÉSENTATION
+    =================================== -->
+
+    <section class="auth-aside">
+
+      <a href="index.html" class="auth-brand">
+        <span class="auth-brand-mark">N</span>
+        <span>NEX<span>ORA</span></span>
+      </a>
+
+      <div class="auth-aside-content">
+
+        <span class="auth-eyebrow">
+          Votre espace de gestion
+        </span>
+
+        <h1>
+          Tout votre business.
+          <span>Une seule plateforme.</span>
+        </h1>
+
+        <p>
+          Retrouvez vos outils de gestion dans un espace
+          conçu pour vous aider à piloter votre activité.
+        </p>
+
+        <div class="auth-benefits">
+
+          <div class="auth-benefit">
+            <span class="benefit-icon" aria-hidden="true">✓</span>
+            <span>Gestion centralisée de votre activité</span>
+          </div>
+
+          <div class="auth-benefit">
+            <span class="benefit-icon" aria-hidden="true">✓</span>
+            <span>Suivi des stocks et des opérations</span>
+          </div>
+
+          <div class="auth-benefit">
+            <span class="benefit-icon" aria-hidden="true">✓</span>
+            <span>Un espace adapté à votre entreprise</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="auth-aside-footer">
+        <span>La maîtrise de votre gestion.</span>
+        <span>© <span id="asideYear"></span> Nexora</span>
+      </div>
+
+    </section>
+
+    <!-- ==================================
+         FORMULAIRE DE CONNEXION
+    =================================== -->
+
+    <section class="auth-main">
+
+      <div class="auth-form-wrapper">
+
+        <!-- Logo mobile -->
+        <a href="index.html" class="auth-mobile-brand">
+          <span class="auth-brand-mark">N</span>
+          <span>NEX<span>ORA</span></span>
+        </a>
+
+        <!-- En-tête -->
+        <div class="auth-heading">
+          <span class="auth-step">ESPACE CLIENT</span>
+          <h2>Bienvenue</h2>
+          <p>Connectez-vous pour accéder à votre espace.</p>
+        </div>
+
+        <!-- Formulaire -->
+        <form id="loginForm" class="auth-form" novalidate>
+
+          <!-- Adresse e-mail -->
+          <div class="nx-form-group">
+
+            <label class="nx-label" for="email">
+              Adresse e-mail
+            </label>
+
+            <div class="auth-input-wrap">
+
+              <span class="auth-input-icon" aria-hidden="true">
+                ✉
+              </span>
+
+              <input
+                class="nx-input auth-input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="nom@entreprise.com"
+                autocomplete="email"
+                maxlength="254"
+                required
+                aria-describedby="emailError"
+              >
+
+            </div>
+
+            <span
+              class="auth-field-error"
+              id="emailError"
+              aria-live="polite"
+            ></span>
+
+          </div>
+
+          <!-- Mot de passe -->
+          <div class="nx-form-group">
+
+            <div class="auth-password-heading">
+
+              <label class="nx-label" for="password">
+                Mot de passe
+              </label>
+
+              <a href="mot-de-passe-oublie.html" class="auth-forgot">
+                Mot de passe oublié ?
+              </a>
+
+            </div>
+
+            <div class="auth-input-wrap">
+
+              <span class="auth-input-icon" aria-hidden="true">
+                ♙
+              </span>
+
+              <input
+                class="nx-input auth-input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Votre mot de passe"
+                autocomplete="current-password"
+                maxlength="128"
+                required
+                aria-describedby="passwordError"
+              >
+
+              <button
+                type="button"
+                class="auth-password-toggle"
+                id="togglePassword"
+                aria-label="Afficher le mot de passe"
+                aria-pressed="false"
+              >
+                Afficher
+              </button>
+
+            </div>
+
+            <span
+              class="auth-field-error"
+              id="passwordError"
+              aria-live="polite"
+            ></span>
+
+          </div>
+
+          <!-- Messages de connexion -->
+          <div
+            class="auth-alert"
+            id="loginFeedback"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+          <!-- Bouton de connexion -->
+          <button
+            class="nx-btn nx-btn-primary nx-btn-block auth-submit"
+            id="loginSubmit"
+            type="submit"
+          >
+            <span class="login-button-text">Se connecter</span>
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <!-- État du service -->
+          <p class="auth-coming-soon">
+            <span class="auth-status-dot"></span>
+            Connexion sécurisée
+          </p>
+
+        </form>
+
+        <!-- Séparateur -->
+        <div class="auth-divider">
+          <span></span>
+          <small>Nouvel utilisateur ?</small>
+          <span></span>
+        </div>
+
+        <!-- Inscription -->
+        <a
+          href="inscription.html"
+          class="nx-btn nx-btn-secondary nx-btn-block"
+        >
+          Créer un compte
+        </a>
+
+        <!-- Mentions légales -->
+        <p class="auth-legal">
+          En utilisant Nexora, vous pourrez consulter nos
+          <a href="legal/conditions-utilisation.html">
+            conditions d'utilisation
+          </a>
+          et notre
+          <a href="legal/confidentialite.html">
+            politique de confidentialité
+          </a>.
+        </p>
+
+        <!-- Retour -->
+        <a href="index.html" class="auth-back">
+          <span aria-hidden="true">←</span>
+          Retour à l'accueil
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Année et visibilité du mot de passe -->
+  <script>
+    document.getElementById("asideYear").textContent =
+      new Date().getFullYear();
+
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("togglePassword");
+
+    togglePassword.addEventListener("click", () => {
+      const visible = passwordInput.type === "password";
+
+      passwordInput.type = visible ? "text" : "password";
+
+      togglePassword.textContent = visible ? "Masquer" : "Afficher";
+
+      togglePassword.setAttribute(
+        "aria-label",
+        visible ? "Masquer le mot de passe" : "Afficher le mot de passe"
+      );
+
+      togglePassword.setAttribute(
+        "aria-pressed",
+        String(visible)
+      );
+    });
+  </script>
+
+  <!-- Authentification Supabase -->
+  <script type="module" src="js/auth/connexion.js"></script>
+
+</body>
+</html>

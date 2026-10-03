@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#101828">
+  <title>Tableau de bord — NEXORA</title>
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--nx-bg, #F4F6F9);
+      color: var(--nx-text, #101828);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .dashboard {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      min-height: 100vh;
+      padding: 26px 18px;
+      display: flex;
+      flex-direction: column;
+      background: #101828;
+      color: #fff;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 0 10px 32px;
+      font-family: "Manrope", sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: #C9A96E;
+      color: #101828;
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .nav-label {
+      padding: 0 11px;
+      margin: 0 0 10px;
+      color: #98A2B3;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .nav-menu {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 9px;
+      color: #D0D5DD;
+      font-size: 13px;
+      text-decoration: none;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+      background: rgba(255,255,255,.10);
+      color: #fff;
+    }
+
+    .nav-icon {
+      width: 20px;
+      text-align: center;
+      font-size: 17px;
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+      padding-top: 25px;
+    }
+
+    .sidebar-company {
+      margin: 0 5px 15px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .sidebar-company small {
+      display: block;
+      margin-bottom: 5px;
+      color: #98A2B3;
+      font-size: 10px;
+    }
+
+    .sidebar-company strong {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .logout {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 9px;
+      background: transparent;
+      color: #FECACA;
+      text-align: left;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .logout:hover { background: rgba(255,255,255,.08); }
+
+    .main {
+      flex: 1;
+      min-width: 0;
+      padding: 30px 36px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: #667085;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .page-title {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(23px, 3vw, 30px);
+      font-weight: 800;
+    }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px 8px 8px;
+      border: 1px solid #E4E7EC;
+      border-radius: 30px;
+      background: #fff;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #F5EAD5;
+      color: #775B2E;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .user-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .welcome {
+      margin-bottom: 28px;
+      padding: 27px 30px;
+      border-radius: 15px;
+      background: linear-gradient(115deg, #101828, #26354D);
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .welcome::after {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      right: -70px;
+      top: -100px;
+      border: 1px solid rgba(201,169,110,.35);
+      border-radius: 50%;
+      box-shadow: 0 0 0 25px rgba(201,169,110,.04),
+                  0 0 0 50px rgba(201,169,110,.04);
+    }
+
+    .welcome h2 {
+      margin: 0 0 8px;
+      font-family: "Manrope", sans-serif;
+      font-size: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome p {
+      margin: 0;
+      max-width: 570px;
+      color: #D0D5DD;
+      font-size: 13px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-heading {
+      margin: 0 0 16px;
+      font-family: "Manrope", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      min-width: 0;
+      padding: 19px;
+      border: 1px solid #EAECF0;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .stat-label {
+      color: #667085;
+      font-size: 11px;
+    }
+
+    .stat-value {
+      display: block;
+      margin-top: 13px;
+      color: #101828;
+      font-family: "Manrope", sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .stat-note {
+      display: block;
+      margin-top: 5px;
+      color: #98A2B3;
+      font-size: 10px;
+    }
+
+    .content-card {
+      padding: 23px;
+      border: 1px solid #EAECF0;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .empty-state {
+      padding: 27px 10px;
+      text-align: center;
+    }
+
+    .empty-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 13px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #F5EAD5;
+      color: #8A6A37;
+      font-size: 22px;
+    }
+
+    .empty-state h3 {
+      margin: 0 0 7px;
+      font-size: 14px;
+    }
+
+    .empty-state p {
+      max-width: 420px;
+      margin: 0 auto;
+      color: #667085;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .feedback {
+      display: none;
+      margin-bottom: 20px;
+      padding: 12px 15px;
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .feedback.visible { display: block; }
+    .feedback.error {
+      background: #FEF3F2;
+      color: #B42318;
+      border: 1px solid #FECDCA;
+    }
+
+    .loading {
+      color: #667085;
+      font-size: 12px;
+    }
+
+    @media (max-width: 1050px) {
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .main { padding: 25px; }
+    }
+
+    @media (max-width: 700px) {
+      .dashboard { display: block; }
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 13px 15px;
+      }
+      .brand { padding: 0 5px 12px; }
+      .nav-label { display: none; }
+      .nav-menu {
+        display: flex;
+        gap: 5px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+      .nav-item {
+        flex: 0 0 auto;
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+      .nav-icon { display: none; }
+      .sidebar-bottom {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-top: 10px;
+      }
+      .sidebar-company {
+        flex: 1;
+        min-width: 0;
+        margin: 0;
+        padding: 8px 10px;
+      }
+      .logout { width: auto; }
+      .main { padding: 22px 16px; }
+      .topbar { margin-bottom: 23px; }
+      .user-chip { padding: 5px; }
+      .user-name { display: none; }
+      .welcome { padding: 23px 20px; }
+      .welcome h2 { font-size: 19px; }
+      .stats { gap: 10px; }
+      .stat-card { padding: 14px; }
+      .stat-value { font-size: 21px; }
+    }
+
+    @media (max-width: 360px) {
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">N</span>
+        <span>NEXORA</span>
+      </div>
+
+      <p class="nav-label">Espace de travail</p>
+
+      <nav class="nav-menu" aria-label="Navigation principale">
+        <a class="nav-item active" href="dashboard.html" aria-current="page">
+          <span class="nav-icon">▦</span>
+          Tableau de bord
+        </a>
+        <a class="nav-item" href="#" aria-disabled="true">
+          <span class="nav-icon">▤</span>
+          Ventes
+        </a>
+        <a class="nav-item" href="#" aria-disabled="true">
+          <span class="nav-icon">▧</span>
+          Clients
+        </a>
+        <a class="nav-item" href="#" aria-disabled="true">
+          <span class="nav-icon">▣</span>
+          Produits
+        </a>
+        <a class="nav-item" href="#" aria-disabled="true">
+          <span class="nav-icon">▥</span>
+          Finances
+        </a>
+        <a class="nav-item" href="#" aria-disabled="true">
+          <span class="nav-icon">⚙</span>
+          Paramètres
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-company">
+          <small>Entreprise</small>
+          <strong id="companyName">Chargement...</strong>
+        </div>
+        <button class="logout" id="logoutButton" type="button">
+          ↪ Déconnexion
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Vue générale</p>
+          <h1 class="page-title">Tableau de bord</h1>
+        </div>
+
+        <div class="user-chip">
+          <span class="avatar" id="userAvatar">N</span>
+          <span class="user-name" id="userName">Chargement...</span>
+        </div>
+      </header>
+
+      <div class="feedback error" id="dashboardFeedback" role="alert"></div>
+
+      <section class="welcome">
+        <h2 id="welcomeTitle">Bienvenue sur NEXORA</h2>
+        <p>
+          Votre espace de gestion est prêt à accueillir vos activités.
+          Retrouvez progressivement vos outils de gestion au même endroit.
+        </p>
+      </section>
+
+      <section aria-labelledby="statsTitle">
+        <h2 class="section-heading" id="statsTitle">Vue d'ensemble</h2>
+
+        <div class="stats">
+          <article class="stat-card">
+            <span class="stat-label">Chiffre d'affaires</span>
+            <strong class="stat-value">—</strong>
+            <span class="stat-note">En attente des données</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Ventes</span>
+            <strong class="stat-value">—</strong>
+            <span class="stat-note">En attente des données</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Clients</span>
+            <strong class="stat-value">—</strong>
+            <span class="stat-note">En attente des données</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Produits</span>
+            <strong class="stat-value">—</strong>
+            <span class="stat-note">En attente des données</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-card" aria-labelledby="activityTitle">
+        <h2 class="section-heading" id="activityTitle">Activité récente</h2>
+        <div class="empty-state">
+          <div class="empty-icon" aria-hidden="true">▤</div>
+          <h3>Votre espace est initialisé</h3>
+          <p>
+            Les ventes, les clients et les autres activités apparaîtront
+            ici lorsque les modules correspondants seront disponibles.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../js/core/dashboard.js"></script>
+</body>
+</html>
