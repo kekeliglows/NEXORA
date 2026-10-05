@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f172a">
+  <title>Stocks — Nexora</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <style>
+    body { background: var(--nx-slate-50); }
+    .page-header { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:24px; }
+    .page-title { font-family:var(--nx-font-heading); font-size:clamp(1.25rem,2.5vw,1.75rem); font-weight:800; letter-spacing:-0.025em; color:var(--nx-text-primary); margin-bottom:4px; }
+    .page-desc  { font-size:.875rem; color:var(--nx-text-secondary); }
+    .add-btn { display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 18px; border:none; border-radius:var(--nx-radius-md); background:var(--nx-indigo-600); color:#fff; font-size:.875rem; font-weight:600; font-family:inherit; cursor:pointer; white-space:nowrap; transition:background 180ms,box-shadow 180ms; }
+    .add-btn:hover { background:var(--nx-indigo-700); box-shadow:0 4px 12px rgba(79,70,229,.3); }
+    .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
+    .stat-card { background:var(--nx-surface); border:1px solid var(--nx-border); border-radius:var(--nx-radius-xl); padding:20px 22px; display:flex; flex-direction:column; gap:8px; }
+    .stat-label { font-size:.8125rem; color:var(--nx-text-secondary); }
+    .stat-value { font-family:var(--nx-font-heading); font-size:2rem; font-weight:800; color:var(--nx-text-primary); line-height:1; }
+    .stat-card.warning .stat-value { color:var(--nx-warning); }
+    .stat-card.danger  .stat-value { color:var(--nx-danger);  }
+    .toolbar { display:flex; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+    .search-wrap { position:relative; flex:1; min-width:220px; }
+    .search-icon { position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--nx-slate-400); pointer-events:none; }
+    .search-input { width:100%; height:40px; padding:0 14px 0 38px; border:1px solid var(--nx-border); border-radius:var(--nx-radius-md); background:var(--nx-surface); color:var(--nx-text-primary); font-size:.875rem; font-family:inherit; outline:none; transition:border-color 200ms,box-shadow 200ms; }
+    .search-input::placeholder { color:var(--nx-slate-400); }
+    .search-input:focus { border-color:var(--nx-indigo-400); box-shadow:0 0 0 3px rgba(99,102,241,.15); }
+    .filter-select { height:40px; padding:0 14px; border:1px solid var(--nx-border); border-radius:var(--nx-radius-md); background:var(--nx-surface); color:var(--nx-text-primary); font-size:.875rem; font-family:inherit; outline:none; cursor:pointer; }
+    .feedback { display:none; padding:12px 16px; border:1px solid transparent; border-radius:var(--nx-radius-md); font-size:.875rem; margin-bottom:18px; font-family:inherit; }
+    .feedback.success { display:block; background:var(--nx-success-bg); border-color:var(--nx-success-border); color:var(--nx-success); }
+    .feedback.error   { display:block; background:var(--nx-danger-bg);  border-color:var(--nx-danger-border);  color:var(--nx-danger); }
+    .table-card { background:var(--nx-surface); border:1px solid var(--nx-border); border-radius:var(--nx-radius-xl); overflow:hidden; }
+    .table-wrap { width:100%; overflow-x:auto; }
+    .stocks-table { width:100%; border-collapse:collapse; min-width:640px; }
+    .stocks-table thead tr { background:var(--nx-slate-50); border-bottom:1px solid var(--nx-border); }
+    .stocks-table th { padding:12px 18px; text-align:left; font-size:.6875rem; font-weight:700; color:var(--nx-slate-500); letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
+    .stocks-table td { padding:15px 18px; color:var(--nx-slate-700); font-size:.875rem; border-bottom:1px solid var(--nx-slate-100); vertical-align:middle; font-family:inherit; }
+    .stocks-table tbody tr:last-child td { border-bottom:none; }
+    .stocks-table tbody tr:hover { background:var(--nx-slate-50); }
+    .product-name { font-weight:600; color:var(--nx-text-primary); display:block; }
+    .product-sku  { font-size:.75rem; color:var(--nx-text-muted); font-family:monospace; margin-top:2px; display:block; }
+    .stock-normal { font-weight:700; color:var(--nx-success); }
+    .stock-low    { font-weight:700; color:var(--nx-warning); }
+    .stock-empty  { font-weight:700; color:var(--nx-danger);  }
+    .badge { display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:999px; font-size:.75rem; font-weight:600; white-space:nowrap; }
+    .badge::before { content:''; width:5px; height:5px; border-radius:50%; background:currentColor; }
+    .badge-normal { background:var(--nx-success-bg); color:var(--nx-success); }
+    .badge-low    { background:var(--nx-warning-bg); color:var(--nx-warning); }
+    .badge-empty  { background:var(--nx-danger-bg);  color:var(--nx-danger);  }
+    .movement-btn { display:inline-flex; align-items:center; height:32px; padding:0 12px; border:1px solid var(--nx-border); border-radius:var(--nx-radius-sm); background:var(--nx-surface); color:var(--nx-slate-600); font-size:.75rem; font-weight:600; font-family:inherit; cursor:pointer; transition:background 150ms,border-color 150ms; }
+    .movement-btn:hover { background:var(--nx-slate-50); border-color:var(--nx-slate-300); }
+    .empty-state { display:flex; flex-direction:column; align-items:center; padding:60px 20px; text-align:center; gap:10px; }
+    .empty-title { font-weight:600; font-size:.9375rem; color:var(--nx-text-primary); margin:0; }
+    .empty-desc  { font-size:.8125rem; color:var(--nx-text-secondary); max-width:300px; line-height:1.6; margin:0; }
+    /* Modal */
+    .modal-backdrop { position:fixed; inset:0; z-index:500; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(15,23,42,.55); backdrop-filter:blur(4px); }
+    .modal-backdrop.open { display:flex; }
+    .modal { width:100%; max-width:520px; background:var(--nx-surface); border-radius:var(--nx-radius-2xl); box-shadow:var(--nx-shadow-2xl); overflow:hidden; }
+    .modal-header { display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border-bottom:1px solid var(--nx-border); }
+    .modal-header h2 { font-family:var(--nx-font-heading); font-size:1.0625rem; font-weight:700; color:var(--nx-text-primary); margin:0; }
+    .close-btn { width:32px; height:32px; display:grid; place-items:center; border:1px solid var(--nx-border); border-radius:var(--nx-radius-md); background:transparent; color:var(--nx-slate-500); cursor:pointer; font-size:20px; font-family:inherit; }
+    .close-btn:hover { background:var(--nx-slate-50); }
+    .modal-body { padding:24px; }
+    .form-group { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+    .form-group:last-child { margin-bottom:0; }
+    .form-group label { font-size:.8125rem; font-weight:500; color:var(--nx-slate-700); }
+    .form-group input,.form-group select,.form-group textarea { width:100%; box-sizing:border-box; height:42px; padding:0 14px; border:1px solid var(--nx-border); border-radius:var(--nx-radius-md); background:var(--nx-surface); color:var(--nx-text-primary); font-size:.875rem; font-family:inherit; outline:none; transition:border-color 200ms,box-shadow 200ms; }
+    .form-group textarea { height:auto; min-height:80px; padding-top:10px; padding-bottom:10px; resize:vertical; }
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color:var(--nx-indigo-400); box-shadow:0 0 0 3px rgba(99,102,241,.15); }
+    .modal-footer { display:flex; justify-content:flex-end; gap:10px; padding:16px 24px; border-top:1px solid var(--nx-border); }
+    .btn-cancel { height:38px; padding:0 18px; border:1px solid var(--nx-border); border-radius:var(--nx-radius-md); background:var(--nx-surface); color:var(--nx-slate-700); font-size:.875rem; font-weight:600; font-family:inherit; cursor:pointer; }
+    .btn-cancel:hover { background:var(--nx-slate-50); }
+    .btn-save { height:38px; padding:0 22px; border:none; border-radius:var(--nx-radius-md); background:var(--nx-indigo-600); color:#fff; font-size:.875rem; font-weight:600; font-family:inherit; cursor:pointer; transition:background 180ms,box-shadow 180ms; }
+    .btn-save:hover { background:var(--nx-indigo-700); box-shadow:0 4px 12px rgba(79,70,229,.3); }
+    .btn-save:disabled { opacity:.5; cursor:not-allowed; }
+    .topbar-status { display:flex; align-items:center; gap:7px; font-size:.75rem; color:var(--nx-slate-400); }
+    .topbar-dot { width:6px; height:6px; border-radius:50%; background:var(--nx-success); }
+    @media(max-width:768px){ .stats-row{grid-template-columns:1fr;} .page-header{flex-direction:column;align-items:flex-start;} .add-btn{width:100%;justify-content:center;} }
+  </style>
+</head>
+<body>
+<div class="nx-app">
+
+  <!-- SIDEBAR -->
+  <aside class="nx-sidebar" id="sidebar" aria-label="Navigation principale">
+    <a href="../index.html" class="nx-sidebar-brand" aria-label="Nexora, accueil">
+      <span class="nx-sidebar-brand-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5l4 0 8 10V5h2v14h-4L6 9v10H4z" fill="white"/></svg></span>
+      <span class="nx-sidebar-brand-name">NEX<span>ORA</span></span>
+    </a>
+    <p class="nx-sidebar-section">Espace de travail</p>
+    <nav class="nx-sidebar-nav">
+      <a href="dashboard.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/></svg></span>
+        Tableau de bord
+      </a>
+      <a href="membres.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM18 17a6 6 0 1 0-12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        Membres
+      </a>
+      <a href="produits.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        Produits
+      </a>
+      <a href="stocks.html" class="nx-nav-link active" aria-current="page">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M3 14l4-4 4 4 6-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Stocks
+      </a>
+      <a href="clients.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM4 17a6 6 0 0 1 12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        Clients
+      </a>
+      <a href="fournisseurs.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M3 8l7-5 7 5v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 18V12h4v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Fournisseurs
+      </a>
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:.4;cursor:not-allowed;">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M3 10h14M10 3l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Ventes
+      </a>
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:.4;cursor:not-allowed;">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10h6M7 7h6M7 13h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        Finances
+      </a>
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:.4;cursor:not-allowed;">
+        <span class="nx-nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        Paramètres
+      </a>
+    </nav>
+    <div class="nx-sidebar-bottom">
+      <div class="nx-user-row">
+        <span class="nx-avatar" id="userAvatar" aria-hidden="true">N</span>
+        <div class="nx-user-info">
+          <span class="nx-user-name" id="userName">Chargement...</span>
+          <span class="nx-user-role" id="companyName">Organisation</span>
+        </div>
+        <button class="nx-logout-btn" id="logoutButton" type="button" aria-label="Se déconnecter" title="Se déconnecter">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="nx-sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN -->
+  <main class="nx-main">
+    <header class="nx-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="nx-mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <nav aria-label="Fil d'Ariane" style="font-size:.8125rem;color:var(--nx-slate-400);">
+          <span>Nexora</span><span aria-hidden="true" style="margin:0 6px;">/</span>
+          <strong style="color:var(--nx-text-primary);">Stocks</strong>
+        </nav>
+      </div>
+      <div class="topbar-status">
+        <span class="topbar-dot" aria-hidden="true"></span>Espace sécurisé
+      </div>
+    </header>
+
+    <div class="nx-page-content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Stocks</h1>
+          <p class="page-desc">Suivez les niveaux de stock et enregistrez les mouvements.</p>
+        </div>
+        <button type="button" class="add-btn" id="addMovementButton">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          Nouveau mouvement
+        </button>
+      </div>
+
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+      <!-- Stats — IDs attendus par stocks.js -->
+      <div class="stats-row">
+        <article class="stat-card">
+          <p class="stat-label">Produits en stock</p>
+          <p class="stat-value" id="totalProducts">0</p>
+        </article>
+        <article class="stat-card warning">
+          <p class="stat-label">Stocks faibles</p>
+          <p class="stat-value" id="lowStockProducts">0</p>
+        </article>
+        <article class="stat-card danger">
+          <p class="stat-label">Stocks épuisés</p>
+          <p class="stat-value" id="emptyStockProducts">0</p>
+        </article>
+      </div>
+
+      <!-- Toolbar -->
+      <section class="toolbar" aria-label="Filtres">
+        <div class="search-wrap">
+          <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" id="searchInput" class="search-input" placeholder="Rechercher un produit..." autocomplete="off">
+        </div>
+        <select id="stockFilter" class="filter-select">
+          <option value="all">Tous les stocks</option>
+          <option value="normal">Stock normal</option>
+          <option value="low">Stock faible</option>
+          <option value="empty">Stock épuisé</option>
+        </select>
+      </section>
+
+      <!-- Tableau — 6 colonnes alignées sur buildRow() de stocks.js -->
+      <div class="table-card">
+        <div class="table-wrap">
+          <table class="stocks-table">
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Catégorie</th>
+                <th>Stock actuel</th>
+                <th>Seuil minimum</th>
+                <th>État</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="stocksTableBody">
+              <tr>
+                <td colspan="6">
+                  <div class="empty-state">
+                    <p class="empty-title">Chargement des stocks...</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- MODAL MOUVEMENT — id="movementModal" + id="closeModalButton" -->
+<div class="modal-backdrop" id="movementModal" role="dialog" aria-modal="true" aria-labelledby="movementModalTitle" aria-hidden="true">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="movementModalTitle">Nouveau mouvement</h2>
+      <button type="button" class="close-btn" id="closeModalButton" aria-label="Fermer">×</button>
+    </div>
+    <form id="movementForm">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="movementProduct">Produit *</label>
+          <select id="movementProduct" required>
+            <option value="">Sélectionner un produit</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="movementType">Type de mouvement *</label>
+          <select id="movementType" required>
+            <option value="">Sélectionner</option>
+            <option value="purchase">Entrée — Achat</option>
+            <option value="sale">Sortie — Vente</option>
+            <option value="adjustment_in">Ajustement positif</option>
+            <option value="adjustment_out">Ajustement négatif</option>
+            <option value="return_in">Retour client</option>
+            <option value="return_out">Retour fournisseur</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="movementQuantity">Quantité *</label>
+          <input type="number" id="movementQuantity" min="0.001" step="0.001" required placeholder="Ex. 10">
+        </div>
+        <div class="form-group">
+          <label for="movementReason">Motif / commentaire</label>
+          <textarea id="movementReason" maxlength="500" placeholder="Expliquez le mouvement..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="cancelMovementButton">Annuler</button>
+        <button type="submit" class="btn-save" id="saveMovementButton">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  function toggleSidebar(open) {
+    sidebar.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+  }
+  menuBtn.addEventListener('click', () => toggleSidebar(!sidebar.classList.contains('open')));
+  overlay.addEventListener('click', () => toggleSidebar(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleSidebar(false); });
+  sidebar.querySelectorAll('.nx-nav-link').forEach(l => l.addEventListener('click', () => toggleSidebar(false)));
+</script>
+
+<script type="module" src="../js/core/stocks.js"></script>
+</body>
+</html>

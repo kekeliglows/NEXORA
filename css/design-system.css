@@ -1,197 +1,178 @@
-
 /* ==================================================
-   PROJET : NEXORA
-   FICHIER : css/design-system.css
-   DESCRIPTION : Système de design centralisé
-   VERSION : 1.0.0
-   AUTEUR : N'dja Baham Kevin
+   NEXORA — Design System v2.0
+   Palette : Indigo + Slate. Look SaaS pro, moderne.
 ================================================== */
 
-
-/* ==================================================
-   1. IDENTITÉ VISUELLE
-================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Couleurs principales */
-  --nx-navy: #101828;
-  --nx-navy-light: #19263a;
-  --nx-navy-dark: #0b1220;
 
-  --nx-gold: #c9a96e;
-  --nx-gold-light: #e4d1a9;
-  --nx-gold-dark: #a77e3e;
+  /* ── Couleurs primaires ── */
+  --nx-indigo-50:  #eef2ff;
+  --nx-indigo-100: #e0e7ff;
+  --nx-indigo-200: #c7d2fe;
+  --nx-indigo-300: #a5b4fc;
+  --nx-indigo-400: #818cf8;
+  --nx-indigo-500: #6366f1;
+  --nx-indigo-600: #4f46e5;
+  --nx-indigo-700: #4338ca;
+  --nx-indigo-800: #3730a3;
+  --nx-indigo-900: #312e81;
 
-  /* Couleurs neutres */
-  --nx-white: #ffffff;
-  --nx-pearl: #f4f6f9;
-  --nx-gray-50: #f9fafb;
-  --nx-gray-100: #f2f4f7;
-  --nx-gray-200: #e4e7ec;
-  --nx-gray-300: #d0d5dd;
-  --nx-gray-400: #98a2b3;
-  --nx-gray-500: #667085;
-  --nx-gray-600: #475467;
-  --nx-gray-700: #344054;
-  --nx-gray-800: #1d2939;
-  --nx-gray-900: #101828;
+  /* ── Couleurs de surface (Slate) ── */
+  --nx-slate-50:  #f8fafc;
+  --nx-slate-100: #f1f5f9;
+  --nx-slate-200: #e2e8f0;
+  --nx-slate-300: #cbd5e1;
+  --nx-slate-400: #94a3b8;
+  --nx-slate-500: #64748b;
+  --nx-slate-600: #475569;
+  --nx-slate-700: #334155;
+  --nx-slate-800: #1e293b;
+  --nx-slate-900: #0f172a;
+  --nx-slate-950: #090e1a;
 
-  /* Couleurs fonctionnelles */
-  --nx-success: #15803d;
-  --nx-success-bg: #dcfce7;
+  /* ── Alias sémantiques ── */
+  --nx-bg:           var(--nx-slate-50);
+  --nx-surface:      #ffffff;
+  --nx-surface-2:    var(--nx-slate-100);
+  --nx-border:       var(--nx-slate-200);
+  --nx-border-focus: var(--nx-indigo-400);
 
-  --nx-warning: #d97706;
-  --nx-warning-bg: #fef3c7;
+  --nx-text-primary:   var(--nx-slate-900);
+  --nx-text-secondary: var(--nx-slate-500);
+  --nx-text-muted:     var(--nx-slate-400);
+  --nx-text-inverse:   #ffffff;
 
-  --nx-danger: #dc2626;
-  --nx-danger-bg: #fee2e2;
+  --nx-brand:        var(--nx-indigo-500);
+  --nx-brand-hover:  var(--nx-indigo-600);
+  --nx-brand-light:  var(--nx-indigo-50);
 
-  --nx-info: #2563eb;
-  --nx-info-bg: #dbeafe;
+  /* ── Couleurs fonctionnelles ── */
+  --nx-success:       #16a34a;
+  --nx-success-bg:    #f0fdf4;
+  --nx-success-border:#bbf7d0;
 
+  --nx-warning:       #d97706;
+  --nx-warning-bg:    #fffbeb;
+  --nx-warning-border:#fde68a;
 
-  /* ==================================================
-     2. TYPOGRAPHIE
-  ================================================== */
+  --nx-danger:        #dc2626;
+  --nx-danger-bg:     #fef2f2;
+  --nx-danger-border: #fecaca;
 
-  --nx-font-primary: "DM Sans", sans-serif;
-  --nx-font-heading: "Manrope", sans-serif;
+  --nx-info:          #2563eb;
+  --nx-info-bg:       #eff6ff;
+  --nx-info-border:   #bfdbfe;
 
-  --nx-text-xs: 0.75rem;
-  --nx-text-sm: 0.875rem;
-  --nx-text-base: 1rem;
-  --nx-text-lg: 1.125rem;
-  --nx-text-xl: 1.25rem;
-  --nx-text-2xl: 1.5rem;
-  --nx-text-3xl: 1.875rem;
-  --nx-text-4xl: 2.25rem;
+  /* ── Typographie ── */
+  --nx-font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --nx-font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --nx-font-mono:    'JetBrains Mono', 'Fira Code', monospace;
 
-  --nx-font-normal: 400;
-  --nx-font-medium: 500;
-  --nx-font-semibold: 600;
-  --nx-font-bold: 700;
+  --nx-text-xs:   0.6875rem; /* 11px */
+  --nx-text-sm:   0.8125rem; /* 13px */
+  --nx-text-base: 0.9375rem; /* 15px */
+  --nx-text-md:   1rem;      /* 16px */
+  --nx-text-lg:   1.125rem;  /* 18px */
+  --nx-text-xl:   1.25rem;   /* 20px */
+  --nx-text-2xl:  1.5rem;    /* 24px */
+  --nx-text-3xl:  1.875rem;  /* 30px */
+  --nx-text-4xl:  2.25rem;   /* 36px */
+  --nx-text-5xl:  3rem;      /* 48px */
+
+  --nx-font-normal:    400;
+  --nx-font-medium:    500;
+  --nx-font-semibold:  600;
+  --nx-font-bold:      700;
   --nx-font-extrabold: 800;
 
-  --nx-leading-tight: 1.25;
-  --nx-leading-normal: 1.5;
+  --nx-leading-tight:   1.2;
+  --nx-leading-snug:    1.4;
+  --nx-leading-normal:  1.6;
   --nx-leading-relaxed: 1.75;
 
+  /* ── Espacements ── */
+  --nx-space-1:  0.25rem;   /* 4px  */
+  --nx-space-2:  0.5rem;    /* 8px  */
+  --nx-space-3:  0.75rem;   /* 12px */
+  --nx-space-4:  1rem;      /* 16px */
+  --nx-space-5:  1.25rem;   /* 20px */
+  --nx-space-6:  1.5rem;    /* 24px */
+  --nx-space-8:  2rem;      /* 32px */
+  --nx-space-10: 2.5rem;    /* 40px */
+  --nx-space-12: 3rem;      /* 48px */
+  --nx-space-16: 4rem;      /* 64px */
+  --nx-space-20: 5rem;      /* 80px */
+  --nx-space-24: 6rem;      /* 96px */
 
-  /* ==================================================
-     3. ESPACEMENTS
-  ================================================== */
-
-  --nx-space-1: 4px;
-  --nx-space-2: 8px;
-  --nx-space-3: 12px;
-  --nx-space-4: 16px;
-  --nx-space-5: 20px;
-  --nx-space-6: 24px;
-  --nx-space-8: 32px;
-  --nx-space-10: 40px;
-  --nx-space-12: 48px;
-  --nx-space-16: 64px;
-  --nx-space-20: 80px;
-
-
-  /* ==================================================
-     4. BORDURES ET ARRONDIS
-  ================================================== */
-
+  /* ── Bordures & rayons ── */
+  --nx-radius-xs: 4px;
   --nx-radius-sm: 6px;
-  --nx-radius-md: 9px;
+  --nx-radius-md: 8px;
   --nx-radius-lg: 12px;
   --nx-radius-xl: 16px;
-  --nx-radius-2xl: 22px;
+  --nx-radius-2xl: 20px;
   --nx-radius-full: 9999px;
 
-  --nx-border: 1px solid var(--nx-gray-200);
-  --nx-border-gold: 1px solid var(--nx-gold);
+  /* ── Ombres ── */
+  --nx-shadow-xs:  0 1px 2px rgba(15, 23, 42, 0.04);
+  --nx-shadow-sm:  0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --nx-shadow-md:  0 4px 8px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --nx-shadow-lg:  0 10px 24px rgba(15, 23, 42, 0.08), 0 4px 8px rgba(15, 23, 42, 0.04);
+  --nx-shadow-xl:  0 20px 40px rgba(15, 23, 42, 0.10), 0 8px 16px rgba(15, 23, 42, 0.06);
+  --nx-shadow-2xl: 0 40px 80px rgba(15, 23, 42, 0.15);
 
+  /* ── Ring / Focus ── */
+  --nx-ring: 0 0 0 3px rgba(99, 102, 241, 0.2);
 
-  /* ==================================================
-     5. OMBRES
-  ================================================== */
+  /* ── Transitions ── */
+  --nx-ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --nx-ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --nx-ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --nx-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  --nx-shadow-sm:
-    0 1px 2px rgba(16, 24, 40, 0.05);
+  --nx-duration-fast:   100ms;
+  --nx-duration-normal: 200ms;
+  --nx-duration-slow:   350ms;
 
-  --nx-shadow-md:
-    0 4px 12px rgba(16, 24, 40, 0.08);
-
-  --nx-shadow-lg:
-    0 12px 28px rgba(16, 24, 40, 0.10);
-
-  --nx-shadow-xl:
-    0 24px 50px rgba(16, 24, 40, 0.16);
-
-
-  /* ==================================================
-     6. TRANSITIONS
-  ================================================== */
-
-  --nx-transition-fast: 150ms ease;
-  --nx-transition-normal: 250ms ease;
-  --nx-transition-slow: 400ms ease;
-
-
-  /* ==================================================
-     7. DIMENSIONS
-  ================================================== */
-
-  --nx-container-width: 1200px;
-  --nx-header-height: 76px;
-  --nx-sidebar-width: 260px;
+  /* ── Layout ── */
+  --nx-container: 1280px;
+  --nx-sidebar-width: 256px;
+  --nx-header-height: 64px;
 }
 
-
-/* ==================================================
-   8. MODE SOMBRE
-   Activable sur les pages qui le prennent en charge
-================================================== */
-
+/* ── Mode sombre ── */
 [data-theme="dark"] {
-  --nx-white: #101828;
-  --nx-pearl: #0b1220;
-  --nx-gray-50: #111c2e;
-  --nx-gray-100: #19263a;
-  --nx-gray-200: #344054;
-  --nx-gray-300: #475467;
-  --nx-gray-400: #98a2b3;
-  --nx-gray-500: #aab4c3;
-  --nx-gray-600: #c0c8d4;
-  --nx-gray-700: #d0d5dd;
-  --nx-gray-800: #e4e7ec;
-  --nx-gray-900: #f9fafb;
+  --nx-bg:           var(--nx-slate-950);
+  --nx-surface:      var(--nx-slate-900);
+  --nx-surface-2:    var(--nx-slate-800);
+  --nx-border:       var(--nx-slate-700);
 
-  --nx-border: 1px solid #344054;
+  --nx-text-primary:   #f1f5f9;
+  --nx-text-secondary: var(--nx-slate-400);
+  --nx-text-muted:     var(--nx-slate-500);
 
-  --nx-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
-  --nx-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --nx-shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.35);
+  --nx-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.3);
+  --nx-shadow-md:  0 4px 8px rgba(0, 0, 0, 0.35);
+  --nx-shadow-lg:  0 10px 24px rgba(0, 0, 0, 0.4);
 }
 
-
-/* ==================================================
-   9. ACCESSIBILITÉ
-================================================== */
-
+/* ── Accessibilité ── */
 :focus-visible {
-  outline: 3px solid var(--nx-gold);
-  outline-offset: 3px;
+  outline: 2px solid var(--nx-indigo-500);
+  outline-offset: 2px;
 }
 
 ::selection {
-  color: var(--nx-navy);
-  background: var(--nx-gold-light);
+  background: var(--nx-indigo-100);
+  color: var(--nx-indigo-900);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

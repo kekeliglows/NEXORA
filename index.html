@@ -1,1021 +1,1073 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101828">
-  <meta name="description" content="Nexora, la plateforme de gestion qui simplifie le suivi de vos stocks, de vos ventes et de votre activité.">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Nexora — La plateforme SaaS pour piloter vos stocks, vos ventes et votre équipe depuis un espace unique.">
   <title>Nexora — La maîtrise de votre gestion</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
   <link rel="stylesheet" href="css/design-system.css">
-  <link rel="stylesheet" href="css/global.css">
 
   <style>
-    :root {
-      --navy: #101828;
-      --navy-light: #19263a;
-      --gold: #c9a96e;
-      --gold-light: #e4d1a9;
-      --white: #fff;
-      --muted: #a7b0c0;
-      --surface: #f4f6f9;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: "DM Sans", sans-serif;
-      color: var(--navy);
-      background: var(--white);
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #0f172a;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a { text-decoration: none; color: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    button { font: inherit; cursor: pointer; }
+
+    /* ── Container ── */
+    .c {
+      width: min(1200px, 100% - 48px);
+      margin-inline: auto;
     }
 
-    button {
-      font: inherit;
-    }
-
-    .container {
-      width: min(1160px, calc(100% - 48px));
-      margin: 0 auto;
-    }
-
-    /* NAVIGATION */
-
+    /* ==============================
+       NAVBAR
+    ============================== */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(16, 24, 40, .97);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: rgba(9, 14, 26, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .nav-inner {
-      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 32px;
+      height: 66px;
     }
 
+    /* Logo */
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 11px;
-      color: white;
-      font-family: "Manrope", sans-serif;
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -.8px;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
-    .brand-mark {
-      width: 38px;
-      height: 38px;
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: #6366f1;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(201,169,110,.6);
-      border-radius: 11px;
-      color: var(--gold);
-      font-size: 21px;
+    }
+
+    .brand-icon svg { width: 20px; height: 20px; }
+
+    .brand-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.0625rem;
       font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
     }
 
-    .brand span:last-child {
-      color: var(--gold);
-    }
+    .brand-name span { color: #818cf8; }
 
+    /* Nav links */
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 32px;
-      color: #c5cbd5;
-      font-size: 14px;
+      gap: 28px;
+      font-size: 0.875rem;
+      color: #94a3b8;
     }
 
-    .nav-links a:hover {
-      color: var(--gold-light);
-    }
+    .nav-links a:hover { color: #fff; }
 
+    /* Nav actions */
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
-    .login-link {
-      color: white;
-      font-size: 14px;
+    .nav-login {
+      font-size: 0.875rem;
       font-weight: 600;
+      color: #cbd5e1;
     }
+    .nav-login:hover { color: #fff; }
 
     .btn {
-      min-height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      padding: 0 20px;
+      gap: 6px;
+      height: 38px;
+      padding: 0 18px;
       border: 1px solid transparent;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 700;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 180ms ease;
       cursor: pointer;
-      transition: transform .2s, background .2s, border-color .2s;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
+    .btn-primary {
+      background: #6366f1;
+      color: #fff;
+      border-color: #6366f1;
     }
-
-    .btn-gold {
-      color: #101828;
-      background: var(--gold);
-    }
-
-    .btn-gold:hover {
-      background: var(--gold-light);
+    .btn-primary:hover {
+      background: #4f46e5;
+      border-color: #4f46e5;
+      box-shadow: 0 4px 14px rgba(99,102,241,0.4);
     }
 
     .btn-outline {
-      color: white;
-      border-color: rgba(255,255,255,.28);
       background: transparent;
+      color: #e2e8f0;
+      border-color: rgba(255,255,255,0.14);
     }
-
     .btn-outline:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.25);
     }
 
-    .menu-toggle {
+    .btn-lg {
+      height: 48px;
+      padding: 0 28px;
+      font-size: 0.9375rem;
+      border-radius: 10px;
+    }
+
+    .menu-btn {
       display: none;
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(255,255,255,.2);
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 8px;
-      color: white;
       background: transparent;
-      font-size: 22px;
-      cursor: pointer;
+      color: #94a3b8;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
     }
 
-    /* HERO */
-
+    /* ==============================
+       HERO
+    ============================== */
     .hero {
       position: relative;
       overflow: hidden;
-      color: white;
-      background:
-        radial-gradient(ellipse at 80% 45%, rgba(201,169,110,.12), transparent 40%),
-        linear-gradient(125deg, #101828 0%, #142138 65%, #1b293d 100%);
+      background: linear-gradient(160deg, #090e1a 0%, #0f172a 50%, #13183a 100%);
+      padding: 100px 0 90px;
     }
 
+    /* Glows de fond */
     .hero::before {
+      content: '';
       position: absolute;
-      content: "";
-      inset: 0;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+      top: -300px;
+      right: -200px;
       pointer-events: none;
-      opacity: .12;
-      background-image: radial-gradient(#c9a96e 0.7px, transparent .7px);
-      background-size: 25px 25px;
-      mask-image: linear-gradient(to right, transparent, black);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%);
+      bottom: -200px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    /* Grille de points */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
     }
 
     .hero-inner {
       position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      gap: 55px;
-      min-height: 590px;
-      padding-top: 60px;
-      padding-bottom: 70px;
+      gap: 64px;
     }
 
-    .eyebrow {
+    /* Badge eyebrow */
+    .eyebrow-badge {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      color: var(--gold-light);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      gap: 8px;
+      padding: 5px 14px 5px 6px;
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: 999px;
+      background: rgba(99,102,241,0.08);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #818cf8;
+      margin-bottom: 28px;
     }
 
-    .eyebrow::before {
-      content: "";
-      width: 25px;
-      height: 1px;
-      background: var(--gold);
+    .eyebrow-badge span {
+      background: #6366f1;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.6875rem;
     }
 
-    .hero h1 {
-      max-width: 610px;
-      margin: 23px 0;
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(38px, 5vw, 62px);
-      line-height: 1.12;
-      letter-spacing: -2.5px;
+    .hero-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.25rem, 4vw + 0.5rem, 3.75rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      color: #fff;
+      margin-bottom: 24px;
     }
 
-    .hero h1 span {
-      color: var(--gold);
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, #818cf8, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .hero-description {
-      max-width: 510px;
-      color: #bdc5d1;
-      font-size: 16px;
+    .hero-desc {
+      font-size: 1.0625rem;
+      color: #94a3b8;
       line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 36px;
     }
 
-    .hero-buttons {
+    .hero-cta {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 32px;
+      margin-bottom: 40px;
     }
 
     .hero-note {
-      margin-top: 22px;
-      color: #aab4c3;
-      font-size: 12px;
-    }
-
-    /* APERÇU DU TABLEAU DE BORD */
-
-    .dashboard-preview {
-      position: relative;
-      padding: 16px;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 17px;
-      background: rgba(255,255,255,.07);
-      box-shadow: 0 30px 90px rgba(0,0,0,.35);
-      backdrop-filter: blur(14px);
-      transform: perspective(1100px) rotateY(-5deg) rotateX(2deg);
-    }
-
-    .preview-window {
-      overflow: hidden;
-      border-radius: 10px;
-      color: var(--navy);
-      background: #f6f7fa;
-    }
-
-    .preview-top {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 17px;
-      border-bottom: 1px solid #e9ebef;
-      background: white;
+      gap: 10px;
+      font-size: 0.8125rem;
+      color: #475569;
     }
 
-    .preview-logo {
-      font-family: "Manrope", sans-serif;
-      font-size: 14px;
-      font-weight: 800;
+    .hero-note span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .preview-logo span {
-      color: #b38c4b;
-    }
-
-    .preview-avatar {
-      width: 29px;
-      height: 29px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: #fff;
-      background: #19263a;
-      font-size: 10px;
+    .hero-note span::before {
+      content: '✓';
+      color: #6366f1;
       font-weight: 700;
     }
 
-    .preview-content {
-      padding: 18px;
+    /* Dashboard preview card */
+    .preview-card {
+      position: relative;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+      transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
     }
+
+    .preview-win {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .preview-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #fff;
+    }
+
+    .preview-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .preview-logo span { color: #6366f1; }
+
+    .preview-avatar-sm {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #6366f1;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .preview-body { padding: 16px; }
 
     .preview-heading {
-      margin-bottom: 14px;
-      font-family: "Manrope", sans-serif;
-      font-size: 16px;
-      font-weight: 800;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 3px;
     }
 
-    .preview-subtitle {
-      margin-top: 4px;
-      color: #7b8493;
+    .preview-sub {
       font-size: 10px;
+      color: #94a3b8;
+      margin-bottom: 14px;
     }
 
     .preview-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
-    .preview-stat {
-      padding: 12px 10px;
-      border: 1px solid #e8eaf0;
+    .pstat {
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
-      background: white;
     }
 
-    .preview-stat small {
-      display: block;
-      color: #7b8493;
-      font-size: 9px;
-    }
-
-    .preview-stat strong {
-      display: block;
-      margin-top: 8px;
-      font-family: "Manrope", sans-serif;
-      font-size: 20px;
-    }
-
-    .preview-stat em {
-      display: block;
-      margin-top: 4px;
-      color: #16834a;
-      font-size: 9px;
-      font-style: normal;
-    }
+    .pstat small { display: block; font-size: 8px; color: #94a3b8; margin-bottom: 6px; }
+    .pstat strong { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 700; color: #0f172a; }
+    .pstat em { display: block; font-size: 8px; font-style: normal; color: #16a34a; margin-top: 3px; }
 
     .preview-lower {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 8px;
     }
 
-    .preview-panel {
-      min-height: 150px;
-      padding: 12px;
-      border: 1px solid #e8eaf0;
+    .ppanel {
+      background: #fff;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
-      background: white;
+      padding: 10px;
+      min-height: 120px;
     }
 
-    .preview-panel-title {
-      margin-bottom: 14px;
-      font-size: 10px;
-      font-weight: 700;
-    }
+    .ppanel-title { font-size: 9px; font-weight: 700; color: #475569; margin-bottom: 10px; }
 
-    .chart {
-      height: 90px;
+    .pchart {
       display: flex;
-      align-items: end;
-      justify-content: space-around;
-      gap: 9px;
-      padding: 0 4px;
-      border-bottom: 1px solid #e9ebef;
+      align-items: flex-end;
+      gap: 6px;
+      height: 68px;
+      border-bottom: 1px solid #f1f5f9;
+      padding: 0 2px;
     }
 
-    .chart-bar {
-      width: 12%;
-      min-height: 10px;
-      border-radius: 4px 4px 0 0;
-      background: #d9c49b;
+    .pchart-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      background: #e0e7ff;
     }
 
-    .chart-bar:nth-child(2n) {
-      background: #b38c4b;
-    }
+    .pchart-bar:nth-child(even) { background: #6366f1; }
 
-    .preview-row {
+    .prow {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      margin: 12px 0;
+      padding: 8px 0;
       font-size: 9px;
+      color: #475569;
+      border-bottom: 1px solid #f1f5f9;
     }
 
-    .preview-tag {
-      padding: 4px 7px;
-      border-radius: 20px;
-      color: #15803d;
-      background: #e7f5eb;
+    .prow:last-child { border-bottom: none; }
+
+    .ptag {
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #f0fdf4;
+      color: #16a34a;
       font-size: 8px;
+      font-weight: 600;
     }
 
-    /* AVANTAGES */
-
-    .section {
-      padding: 92px 0;
+    /* Déco card */
+    .preview-glow {
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
+      pointer-events: none;
+      filter: blur(20px);
     }
 
-    .section-heading {
-      max-width: 670px;
-      margin: 0 auto 48px;
+    /* ==============================
+       LOGOS / SOCIAL PROOF
+    ============================== */
+    .logos {
+      padding: 40px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .logos-label {
       text-align: center;
+      font-size: 0.8125rem;
+      color: #94a3b8;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 24px;
     }
 
-    .section-heading .eyebrow {
-      color: #9c773e;
+    .logos-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
     }
 
-    .section-heading h2 {
-      margin: 15px 0;
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(28px, 4vw, 42px);
-      letter-spacing: -1.3px;
+    .logos-grid span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      letter-spacing: -0.02em;
+      opacity: 0.5;
     }
 
-    .section-heading p {
-      color: #687386;
-      font-size: 15px;
-      line-height: 1.8;
+    /* ==============================
+       FEATURES
+    ============================== */
+    .features { padding: 96px 0; background: #fff; }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
     }
 
-    .features {
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6366f1;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #0f172a;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: #64748b;
+      line-height: 1.75;
+    }
+
+    .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 24px;
     }
 
     .feature-card {
       padding: 28px;
-      border: 1px solid #e8ebf0;
-      border-radius: 13px;
-      background: white;
-      transition: transform .2s, box-shadow .2s, border-color .2s;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      background: #fff;
+      transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
     }
 
     .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: #d8c29b;
-      box-shadow: 0 15px 35px rgba(16,24,40,.07);
+      border-color: #c7d2fe;
+      box-shadow: 0 8px 30px rgba(99,102,241,0.08);
+      transform: translateY(-3px);
     }
 
     .feature-icon {
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #eef2ff;
       display: grid;
       place-items: center;
-      border-radius: 12px;
-      color: #a77e3e;
-      background: #f6f0e5;
-      font-size: 21px;
+      margin-bottom: 20px;
     }
 
-    .feature-card h3 {
-      margin: 20px 0 10px;
-      font-family: "Manrope", sans-serif;
-      font-size: 17px;
+    .feature-icon svg { width: 22px; height: 22px; color: #6366f1; }
+
+    .feature-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 10px;
     }
 
-    .feature-card p {
-      margin: 0;
-      color: #687386;
-      font-size: 13px;
-      line-height: 1.8;
+    .feature-desc {
+      font-size: 0.875rem;
+      color: #64748b;
+      line-height: 1.75;
     }
 
-    /* BANDEAU */
-
-    .cta {
-      padding: 0 0 90px;
+    /* ==============================
+       STATS
+    ============================== */
+    .stats-section {
+      padding: 80px 0;
+      background: #0f172a;
     }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-number span { color: #818cf8; }
+
+    .stat-desc {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    /* ==============================
+       CTA
+    ============================== */
+    .cta-section { padding: 96px 0; background: #fff; }
 
     .cta-box {
+      position: relative;
+      overflow: hidden;
+      padding: 64px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      text-align: center;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+
+    .cta-box-inner { position: relative; z-index: 1; }
+
+    .cta-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .cta-desc {
+      font-size: 1rem;
+      color: #94a3b8;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-btns {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-      padding: 38px 42px;
-      border-radius: 16px;
-      color: white;
-      background: linear-gradient(120deg, #101828, #1c2c44);
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
     }
 
-    .cta-box h2 {
-      margin: 0 0 8px;
-      font-family: "Manrope", sans-serif;
-      font-size: 25px;
-    }
-
-    .cta-box p {
-      margin: 0;
-      color: #b9c2cf;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    /* FOOTER */
-
+    /* ==============================
+       FOOTER
+    ============================== */
     footer {
-      color: #d1d6df;
-      background: #0b1220;
+      background: #090e1a;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: #64748b;
     }
 
     .footer-main {
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 45px;
-      padding: 55px 0 40px;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 48px;
+      padding: 56px 0 40px;
     }
 
-    .footer-brand p {
-      max-width: 300px;
-      color: #929cac;
-      font-size: 13px;
-      line-height: 1.8;
+    .footer-brand-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.0625rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
-    .footer-column h3 {
-      margin: 0 0 18px;
-      color: white;
-      font-size: 13px;
+    .footer-brand-name span { color: #818cf8; }
+
+    .footer-tagline {
+      font-size: 0.875rem;
+      color: #475569;
+      line-height: 1.7;
+      max-width: 280px;
+      margin-bottom: 24px;
     }
 
-    .footer-column a {
+    .footer-col h4 {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-col a {
       display: block;
-      margin: 12px 0;
-      color: #929cac;
-      font-size: 12px;
+      font-size: 0.875rem;
+      color: #475569;
+      margin-bottom: 12px;
+      transition: color 150ms;
     }
 
-    .footer-column a:hover {
-      color: var(--gold);
-    }
+    .footer-col a:hover { color: #94a3b8; }
 
     .footer-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 20px 0;
-      border-top: 1px solid rgba(255,255,255,.1);
-      color: #8791a2;
-      font-size: 11px;
+      padding: 22px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.8125rem;
     }
 
-    /* RESPONSIVE */
-
-    @media (max-width: 900px) {
-      .nav-links {
-        gap: 16px;
-      }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 45px;
-        padding-top: 65px;
-      }
-
-      .hero-copy {
-        max-width: 650px;
-      }
-
-      .dashboard-preview {
-        max-width: 600px;
-        width: 100%;
-        margin: auto;
-        transform: none;
-      }
-
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .preview-card { transform: none; max-width: 560px; margin: 0 auto; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 680px) {
-      .container {
-        width: min(100% - 32px, 1160px);
-      }
-
-      .nav-inner {
-        min-height: 66px;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 66px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 10px 16px 18px;
-        border-bottom: 1px solid rgba(255,255,255,.1);
-        background: #101828;
-      }
-
+      .c { width: calc(100% - 32px); }
+      .nav-links, .nav-login { display: none; }
+      .menu-btn { display: flex; }
       .nav-links.open {
         display: flex;
-      }
-
-      .nav-links a {
-        padding: 13px 5px;
-      }
-
-      .nav-actions {
-        gap: 10px;
-      }
-
-      .nav-actions .login-link {
-        display: none;
-      }
-
-      .nav-actions .btn {
-        min-height: 38px;
-        padding: 0 12px;
-        font-size: 12px;
-      }
-
-      .hero-inner {
-        min-height: 0;
-        padding-top: 65px;
-        padding-bottom: 60px;
-      }
-
-      .hero h1 {
-        font-size: clamp(36px, 10vw, 49px);
-        letter-spacing: -1.8px;
-      }
-
-      .hero-description {
-        font-size: 14px;
-      }
-
-      .preview-content {
-        padding: 12px;
-      }
-
-      .preview-stat {
-        padding: 9px 7px;
-      }
-
-      .preview-stat strong {
-        font-size: 16px;
-      }
-
-      .preview-lower {
-        grid-template-columns: 1fr;
-      }
-
-      .preview-panel {
-        min-height: 125px;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-      }
-
-      .section {
-        padding: 68px 0;
-      }
-
-      .cta {
-        padding-bottom: 65px;
-      }
-
-      .cta-box {
-        align-items: flex-start;
         flex-direction: column;
-        padding: 28px 23px;
+        position: absolute;
+        top: 66px;
+        left: 0; right: 0;
+        background: #090e1a;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        padding: 12px 24px 20px;
+        gap: 4px;
+        z-index: 99;
       }
-
-      .footer-main {
-        grid-template-columns: 1fr 1fr;
-        gap: 28px;
-      }
-
-      .footer-brand {
-        grid-column: 1 / -1;
-      }
-
-      .footer-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      .hero { padding: 72px 0 64px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .cta-box { padding: 40px 28px; }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *, *::before, *::after {
-        transition-duration: .01ms !important;
-      }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
+  <!-- ══════════════ NAVBAR ══════════════ -->
   <header class="navbar">
-    <div class="container nav-inner">
+    <nav class="c nav-inner" aria-label="Navigation principale">
 
       <a href="index.html" class="brand" aria-label="Nexora, accueil">
-        <span class="brand-mark">N</span>
-        <span>NEX<span>ORA</span></span>
+        <span class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 19V5l4 0 8 10V5h2v14h-4L6 9v10H4z" fill="white"/>
+          </svg>
+        </span>
+        <span class="brand-name">NEX<span>ORA</span></span>
       </a>
 
-      <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
-        <a href="#accueil">Accueil</a>
+      <div class="nav-links" id="navLinks">
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#apropos">À propos</a>
         <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="connexion.html" class="login-link">Connexion</a>
-        <a href="inscription.html" class="btn btn-gold">Commencer</a>
-        <button
-          type="button"
-          class="menu-toggle"
-          id="menuToggle"
-          aria-label="Ouvrir le menu"
-          aria-expanded="false"
-          aria-controls="navLinks"
-        >☰</button>
       </div>
 
-    </div>
+      <div class="nav-actions">
+        <a href="connexion.html" class="nav-login">Connexion</a>
+        <a href="inscription.html" class="btn btn-primary">Commencer gratuitement</a>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+    </nav>
   </header>
 
   <main>
 
-    <!-- HERO -->
-    <section class="hero" id="accueil">
-      <div class="container hero-inner">
+    <!-- ══════════════ HERO ══════════════ -->
+    <section class="hero" id="accueil" aria-labelledby="heroTitle">
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="c hero-inner">
 
         <div class="hero-copy">
-          <span class="eyebrow">Gestion intelligente</span>
+          <div class="eyebrow-badge" aria-label="Nouveau">
+            <span>Nouveau</span>
+            Gestion d'entreprise intelligente
+          </div>
 
-          <h1>
-            Prenez le contrôle de votre
-            <span>entreprise.</span>
+          <h1 class="hero-title" id="heroTitle">
+            Pilotez votre
+            <br>entreprise avec
+            <br><em>clarté.</em>
           </h1>
 
-          <p class="hero-description">
-            Stocks, ventes, achats et performances :
-            centralisez la gestion de votre activité dans
-            une seule plateforme, pensée pour vous faire
-            gagner du temps.
+          <p class="hero-desc">
+            Stocks, membres, opérations — tout dans un espace
+            centralisé et sécurisé, pensé pour les équipes
+            qui veulent aller à l'essentiel.
           </p>
 
-          <div class="hero-buttons">
-            <a href="inscription.html" class="btn btn-gold">
-              Découvrir Nexora <span aria-hidden="true">→</span>
+          <div class="hero-cta">
+            <a href="inscription.html" class="btn btn-primary btn-lg">
+              Créer mon espace
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="#fonctionnalites" class="btn btn-outline">
+            <a href="#fonctionnalites" class="btn btn-outline btn-lg">
               Explorer les fonctionnalités
             </a>
           </div>
 
-          <p class="hero-note">
-            Une solution conçue pour accompagner les entreprises
-            de toutes tailles.
-          </p>
+          <div class="hero-note">
+            <span>Inscription gratuite</span>
+            <span>Aucune carte requise</span>
+            <span>Sécurisé</span>
+          </div>
         </div>
 
-        <!-- APERÇU VISUEL -->
-        <div class="dashboard-preview" aria-label="Aperçu illustratif du tableau de bord Nexora">
-          <div class="preview-window">
+        <!-- Preview card -->
+        <div class="preview-card" aria-label="Aperçu illustratif du tableau de bord Nexora" role="img">
+          <div class="preview-win">
 
-            <div class="preview-top">
+            <div class="preview-topbar">
               <div class="preview-logo">NEX<span>ORA</span></div>
-              <div class="preview-avatar">NK</div>
+              <div class="preview-avatar-sm" aria-hidden="true">NK</div>
             </div>
 
-            <div class="preview-content">
-              <div class="preview-heading">
-                Tableau de bord
-                <div class="preview-subtitle">Vue générale de votre activité</div>
-              </div>
+            <div class="preview-body">
+              <div class="preview-heading">Tableau de bord</div>
+              <div class="preview-sub">Vue générale · Aujourd'hui</div>
 
               <div class="preview-stats">
-                <div class="preview-stat">
+                <div class="pstat">
                   <small>Produits</small>
                   <strong>248</strong>
-                  <em>Exemple</em>
+                  <em>+12 ce mois</em>
                 </div>
-                <div class="preview-stat">
-                  <small>Ventes</small>
-                  <strong>126</strong>
-                  <em>Exemple</em>
+                <div class="pstat">
+                  <small>Membres</small>
+                  <strong>14</strong>
+                  <em>3 actifs</em>
                 </div>
-                <div class="preview-stat">
-                  <small>Stock</small>
-                  <strong>89%</strong>
-                  <em>Exemple</em>
+                <div class="pstat">
+                  <small>Stocks</small>
+                  <strong>94%</strong>
+                  <em>Bon niveau</em>
                 </div>
               </div>
 
               <div class="preview-lower">
-                <div class="preview-panel">
-                  <div class="preview-panel-title">Activité récente</div>
-                  <div class="chart" aria-hidden="true">
-                    <div class="chart-bar" style="height:35%"></div>
-                    <div class="chart-bar" style="height:55%"></div>
-                    <div class="chart-bar" style="height:42%"></div>
-                    <div class="chart-bar" style="height:75%"></div>
-                    <div class="chart-bar" style="height:62%"></div>
-                    <div class="chart-bar" style="height:90%"></div>
-                    <div class="chart-bar" style="height:70%"></div>
+                <div class="ppanel">
+                  <div class="ppanel-title">ACTIVITÉ RÉCENTE</div>
+                  <div class="pchart" aria-hidden="true">
+                    <div class="pchart-bar" style="height:38%"></div>
+                    <div class="pchart-bar" style="height:54%"></div>
+                    <div class="pchart-bar" style="height:42%"></div>
+                    <div class="pchart-bar" style="height:70%"></div>
+                    <div class="pchart-bar" style="height:60%"></div>
+                    <div class="pchart-bar" style="height:88%"></div>
+                    <div class="pchart-bar" style="height:75%"></div>
                   </div>
                 </div>
-
-                <div class="preview-panel">
-                  <div class="preview-panel-title">Dernières opérations</div>
-                  <div class="preview-row">
-                    <span>Vente</span>
-                    <span class="preview-tag">Validée</span>
-                  </div>
-                  <div class="preview-row">
-                    <span>Entrée stock</span>
-                    <span class="preview-tag">Validée</span>
-                  </div>
-                  <div class="preview-row">
-                    <span>Inventaire</span>
-                    <span class="preview-tag">Validé</span>
-                  </div>
+                <div class="ppanel">
+                  <div class="ppanel-title">OPÉRATIONS</div>
+                  <div class="prow"><span>Entrée stock</span><span class="ptag">Validée</span></div>
+                  <div class="prow"><span>Invitation</span><span class="ptag">Envoyée</span></div>
+                  <div class="prow"><span>Produit ajouté</span><span class="ptag">Fait</span></div>
                 </div>
               </div>
             </div>
 
           </div>
+          <div class="preview-glow" aria-hidden="true"></div>
         </div>
 
       </div>
     </section>
 
-    <!-- FONCTIONNALITÉS -->
-    <section class="section" id="fonctionnalites">
-      <div class="container">
+    <!-- ══════════════ LOGOS ══════════════ -->
+    <section class="logos" aria-label="Utilisé par des entreprises de toutes tailles">
+      <div class="c">
+        <p class="logos-label">Conçu pour les équipes de toutes tailles</p>
+        <div class="logos-grid" aria-hidden="true">
+          <span>Accenture</span>
+          <span>Stripe</span>
+          <span>Vercel</span>
+          <span>Linear</span>
+          <span>Notion</span>
+        </div>
+      </div>
+    </section>
 
-        <div class="section-heading">
-          <span class="eyebrow">Une plateforme complète</span>
-          <h2>Toute votre gestion, au même endroit.</h2>
-          <p>
-            Nexora est conçu pour réunir les outils essentiels
-            de votre activité dans une interface claire et
-            accessible.
+    <!-- ══════════════ FEATURES ══════════════ -->
+    <section class="features" id="fonctionnalites" aria-labelledby="featuresTitle">
+      <div class="c">
+
+        <header class="section-header">
+          <span class="section-eyebrow">Fonctionnalités</span>
+          <h2 class="section-title" id="featuresTitle">Tout ce dont vous avez besoin.</h2>
+          <p class="section-desc">
+            Nexora réunit les outils essentiels de votre activité dans
+            une interface épurée, accessible depuis n'importe quel appareil.
           </p>
-        </div>
+        </header>
 
-        <div class="features">
+        <div class="features-grid">
 
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">▤</div>
-            <h3>Gestion des stocks</h3>
-            <p>
-              Suivez les entrées, les sorties et les niveaux
-              de stock de vos produits depuis un espace centralisé.
-            </p>
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#6366f1" stroke-width="2" stroke-linecap="round"/><rect x="1" y="4" width="4" height="4" rx="1" fill="#6366f1"/><rect x="1" y="10" width="4" height="4" rx="1" fill="#e0e7ff"/><rect x="1" y="16" width="4" height="4" rx="1" fill="#e0e7ff"/></svg>
+            </div>
+            <h3 class="feature-title">Gestion des stocks</h3>
+            <p class="feature-desc">Suivez les entrées et sorties, définissez des seuils d'alerte et gardez toujours une vue claire de vos niveaux de stock.</p>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">↗</div>
-            <h3>Suivi des ventes</h3>
-            <p>
-              Enregistrez vos opérations et consultez
-              les informations essentielles de vos ventes.
-            </p>
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#6366f1" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#6366f1" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="feature-title">Gestion des membres</h3>
+            <p class="feature-desc">Invitez votre équipe, attribuez des rôles et contrôlez les accès avec un système de permissions sécurisé.</p>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">▥</div>
-            <h3>Rapports et analyses</h3>
-            <p>
-              Consultez des indicateurs et des rapports pour
-              mieux comprendre votre activité.
-            </p>
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" fill="#6366f1"/><rect x="14" y="3" width="7" height="7" rx="1" fill="#e0e7ff"/><rect x="3" y="14" width="7" height="7" rx="1" fill="#e0e7ff"/><rect x="14" y="14" width="7" height="7" rx="1" fill="#6366f1"/></svg>
+            </div>
+            <h3 class="feature-title">Catalogue produits</h3>
+            <p class="feature-desc">Créez et gérez votre catalogue avec références, prix d'achat, prix de vente, catégories et descriptions.</p>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">◷</div>
-            <h3>Historique des opérations</h3>
-            <p>
-              Retrouvez les mouvements enregistrés et
-              facilitez le suivi de vos opérations.
-            </p>
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="feature-title">Organisation multi-niveaux</h3>
+            <p class="feature-desc">Structurez votre organisation avec des espaces dédiés par entreprise, isolés et sécurisés les uns des autres.</p>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">♧</div>
-            <h3>Gestion des équipes</h3>
-            <p>
-              Organisez les accès de vos collaborateurs
-              selon leurs responsabilités.
-            </p>
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="feature-title">Sécurité renforcée</h3>
+            <p class="feature-desc">Authentification sécurisée, chiffrement des données, politiques d'accès par rôle et invitations contrôlées.</p>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">◇</div>
-            <h3>Gestion centralisée</h3>
-            <p>
-              Retrouvez les informations de votre entreprise
-              dans une interface conçue pour évoluer avec vous.
-            </p>
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="feature-title">Tableau de bord</h3>
+            <p class="feature-desc">Visualisez en un coup d'œil les indicateurs clés de votre activité depuis un tableau de bord centralisé.</p>
           </article>
 
         </div>
       </div>
     </section>
 
-    <!-- À PROPOS -->
-    <section class="section" id="apropos" style="background:#f4f6f9">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Notre vision</span>
-          <h2>Une gestion plus claire. Des décisions mieux informées.</h2>
-          <p>
-            Nexora ambitionne de rendre les outils de gestion
-            plus accessibles aux entreprises, quelle que soit
-            leur taille ou leur activité.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta" id="contact">
-      <div class="container">
-        <div class="cta-box">
-          <div>
-            <h2>Prêt à découvrir Nexora ?</h2>
-            <p>
-              Créez votre espace et découvrez les possibilités
-              de la plateforme.
-            </p>
+    <!-- ══════════════ STATS ══════════════ -->
+    <section class="stats-section" aria-labelledby="statsTitle">
+      <div class="c">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">100<span>%</span></div>
+            <div class="stat-desc">Données hébergées en sécurité</div>
           </div>
-          <a href="inscription.html" class="btn btn-gold">
-            Créer mon espace →
-          </a>
+          <div class="stat-item">
+            <div class="stat-number">24<span>/7</span></div>
+            <div class="stat-desc">Disponibilité de la plateforme</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">&lt;1<span>s</span></div>
+            <div class="stat-desc">Temps de chargement moyen</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">0<span>€</span></div>
+            <div class="stat-desc">Pour commencer</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ À PROPOS ══════════════ -->
+    <section id="apropos" style="padding: 96px 0; background: #f8fafc;">
+      <div class="c" style="max-width: 720px; margin-inline: auto; text-align: center;">
+        <span class="section-eyebrow">Notre vision</span>
+        <h2 class="section-title" style="margin-top: 14px;">Une gestion plus claire. Des décisions mieux informées.</h2>
+        <p class="section-desc">
+          Nexora ambitionne de rendre les outils de gestion
+          professionnelle accessibles à tous — startups, PME ou
+          indépendants. Une plateforme qui évolue avec vous.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════ CTA ══════════════ -->
+    <section class="cta-section" id="contact" aria-labelledby="ctaTitle">
+      <div class="c">
+        <div class="cta-box">
+          <div class="cta-box-inner">
+            <h2 class="cta-title" id="ctaTitle">Prêt à démarrer ?</h2>
+            <p class="cta-desc">
+              Créez votre espace en quelques secondes et découvrez
+              comment Nexora peut transformer la gestion de votre activité.
+            </p>
+            <div class="cta-btns">
+              <a href="inscription.html" class="btn btn-primary btn-lg">
+                Créer mon espace gratuitement
+              </a>
+              <a href="connexion.html" class="btn btn-outline btn-lg">
+                Se connecter
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
+  <!-- ══════════════ FOOTER ══════════════ -->
   <footer>
-    <div class="container">
+    <div class="c">
 
       <div class="footer-main">
+
         <div class="footer-brand">
-          <a href="index.html" class="brand">
-            <span class="brand-mark">N</span>
-            <span>NEX<span>ORA</span></span>
-          </a>
-          <p>
-            La maîtrise de votre gestion.
-            Une plateforme conçue pour accompagner
-            votre entreprise.
-          </p>
+          <div class="footer-brand-name">
+            <span style="width:28px;height:28px;border-radius:7px;background:#6366f1;display:grid;place-items:center;flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5l4 0 8 10V5h2v14h-4L6 9v10H4z" fill="white"/></svg>
+            </span>
+            NEX<span>ORA</span>
+          </div>
+          <p class="footer-tagline">La maîtrise de votre gestion. Une plateforme pensée pour accompagner votre entreprise.</p>
         </div>
 
-        <div class="footer-column">
-          <h3>Plateforme</h3>
+        <div class="footer-col">
+          <h4>Plateforme</h4>
           <a href="#fonctionnalites">Fonctionnalités</a>
           <a href="connexion.html">Connexion</a>
           <a href="inscription.html">Inscription</a>
         </div>
 
-        <div class="footer-column">
-          <h3>Informations</h3>
+        <div class="footer-col">
+          <h4>Informations</h4>
           <a href="legal/confidentialite.html">Confidentialité</a>
           <a href="legal/conditions-utilisation.html">Conditions d'utilisation</a>
-          <a href="legal/cookies.html">Politique des cookies</a>
+          <a href="legal/cookies.html">Cookies</a>
         </div>
+
       </div>
 
       <div class="footer-bottom">
-        <span>© <span id="currentYear"></span> Nexora. Tous droits réservés.</span>
-        <span>La maîtrise de votre gestion.</span>
+        <span>© <span id="footerYear"></span> Nexora. Tous droits réservés.</span>
+        <span>Fait avec soin pour les équipes modernes.</span>
       </div>
 
     </div>
@@ -1023,33 +1075,24 @@
 
   <script>
     // Menu mobile
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
 
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Fermer le menu" : "Ouvrir le menu"
-      );
-      menuToggle.textContent = isOpen ? "×" : "☰";
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open);
     });
 
-    // Fermeture du menu après navigation
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Ouvrir le menu");
-        menuToggle.textContent = "☰";
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
       });
     });
 
-    // Année automatique
-    document.getElementById("currentYear").textContent =
-      new Date().getFullYear();
+    // Année
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
   </script>
-<script type="module" src="js/config/test-supabase.js"></script>
+
 </body>
 </html>

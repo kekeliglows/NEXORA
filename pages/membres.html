@@ -1,308 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Membres | NEXORA</title>
-  <meta name="description" content="Gérez les membres de votre organisation sur NEXORA.">
-  <meta name="theme-color" content="#101828">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Gérez les membres de votre organisation sur Nexora.">
+  <title>Membres — Nexora</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
   <link rel="stylesheet" href="../css/design-system.css">
   <link rel="stylesheet" href="../css/global.css">
 
   <style>
-    :root {
-      --members-sidebar: #101828;
-      --members-gold: #c9a96e;
-      --members-border: #e8ebf0;
-      --members-muted: #778196;
-      --members-bg: #f4f6f9;
-      --members-white: #fff;
-      --members-green: #15803d;
-      --members-red: #dc2626;
-    }
+    body { background: var(--nx-slate-50); }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--members-bg);
-      color: #182230;
-      font-family: "DM Sans", sans-serif;
-    }
-
-    button, input, select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .app {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* SIDEBAR */
-
-    .sidebar {
-      position: fixed;
-      inset: 0 auto 0 0;
-      z-index: 30;
-      display: flex;
-      flex-direction: column;
-      width: 258px;
-      padding: 25px 17px;
-      background: var(--members-sidebar);
-      color: #fff;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      padding: 2px 10px 31px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .brand-logo {
-      display: grid;
-      width: 39px;
-      height: 39px;
-      place-items: center;
-      border-radius: 12px;
-      background: var(--members-gold);
-      color: #101828;
-      font-family: "Manrope", sans-serif;
-      font-size: 21px;
-      font-weight: 800;
-    }
-
-    .brand-name {
-      font-family: "Manrope", sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: .8px;
-    }
-
-    .brand-name span {
-      color: var(--members-gold);
-    }
-
-    .nav-label {
-      margin: 7px 10px 12px;
-      color: #8f9aaf;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .sidebar-nav {
-      display: grid;
-      gap: 6px;
-    }
-
-    .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-height: 45px;
-      padding: 0 12px;
-      border-radius: 9px;
-      color: #c2cad8;
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background .2s, color .2s;
-    }
-
-    .nav-link:hover {
-      background: rgba(255,255,255,.07);
-      color: #fff;
-    }
-
-    .nav-link.active {
-      background: rgba(201,169,110,.14);
-      color: #e8c98f;
-    }
-
-    .nav-icon {
-      display: grid;
-      width: 20px;
-      place-items: center;
-      font-size: 17px;
-    }
-
-    .sidebar-bottom {
-      margin-top: auto;
-      padding-top: 20px;
-    }
-
-    .sidebar-help {
-      margin: 0 0 17px;
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 11px;
-      background: rgba(255,255,255,.035);
-    }
-
-    .sidebar-help strong {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 12px;
-    }
-
-    .sidebar-help p {
-      margin: 0;
-      color: #aab4c5;
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    .user-panel {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 7px 0;
-      border-top: 1px solid rgba(255,255,255,.1);
-    }
-
-    .user-avatar {
-      display: grid;
-      flex-shrink: 0;
-      width: 34px;
-      height: 34px;
-      place-items: center;
-      border-radius: 50%;
-      background: #334155;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .user-details {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .user-details strong {
-      display: block;
-      overflow: hidden;
-      color: #fff;
-      font-size: 12px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .user-details span {
-      display: block;
-      overflow: hidden;
-      margin-top: 3px;
-      color: #9ca8ba;
-      font-size: 10px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .logout-button {
-      display: grid;
-      width: 34px;
-      height: 34px;
-      flex-shrink: 0;
-      place-items: center;
-      border: 0;
-      border-radius: 8px;
-      background: transparent;
-      color: #c2cad8;
-      font-size: 18px;
-    }
-
-    .logout-button:hover {
-      background: rgba(255,255,255,.1);
-      color: #fff;
-    }
-
-    /* MAIN */
-
-    .main {
-      width: calc(100% - 258px);
-      min-width: 0;
-      min-height: 100vh;
-      margin-left: 258px;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 66px;
-      padding: 0 36px;
-      border-bottom: 1px solid var(--members-border);
-      background: #fff;
-    }
-
-    .breadcrumb {
-      color: var(--members-muted);
-      font-size: 12px;
-    }
-
-    .breadcrumb strong {
-      color: #182230;
-      font-weight: 700;
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .topbar-status {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      color: #647084;
-      font-size: 11px;
-    }
-
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #16a34a;
-    }
-
-    .mobile-menu-button {
-      display: none;
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--members-border);
-      border-radius: 9px;
-      background: #fff;
-      color: #182230;
-      font-size: 20px;
-    }
-
-    .content {
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 34px 36px 55px;
-    }
-
-    .page-heading {
+    /* ── Page header ── */
+    .page-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -310,807 +23,639 @@
       margin-bottom: 28px;
     }
 
-    .eyebrow {
-      margin-bottom: 7px;
-      color: #a17d3d;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.6px;
+    .page-eyebrow {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      color: var(--nx-indigo-500);
+      margin-bottom: 6px;
     }
 
-    h1 {
-      margin: 0;
-      color: #101828;
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(25px, 3vw, 32px);
+    .page-title {
+      font-family: var(--nx-font-heading);
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
       font-weight: 800;
-      letter-spacing: -.9px;
+      letter-spacing: -0.025em;
+      color: var(--nx-text-primary);
+      margin-bottom: 6px;
     }
 
-    .page-description {
-      max-width: 560px;
-      margin: 8px 0 0;
-      color: var(--members-muted);
-      font-size: 13px;
-      line-height: 1.7;
+    .page-desc {
+      font-size: 0.875rem;
+      color: var(--nx-text-secondary);
+      line-height: 1.6;
+      max-width: 520px;
     }
 
-    .organization-label {
+    .org-label {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      margin-top: 13px;
-      color: #647084;
-      font-size: 12px;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 0.8125rem;
+      color: var(--nx-text-secondary);
     }
 
-    .organization-label span {
-      color: #182230;
-      font-weight: 700;
-    }
+    .org-label strong { color: var(--nx-text-primary); }
 
-    /* BUTTONS */
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      min-height: 41px;
-      padding: 0 16px;
-      border: 1px solid transparent;
-      border-radius: 9px;
-      font-size: 12px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: background .2s, transform .2s;
-    }
-
-    .btn:focus-visible,
-    .logout-button:focus-visible,
-    .mobile-menu-button:focus-visible {
-      outline: 3px solid rgba(201,169,110,.5);
-      outline-offset: 2px;
-    }
-
-    .btn-primary {
-      background: #101828;
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: #263348;
-    }
-
-    .btn:disabled {
-      cursor: not-allowed;
-      opacity: .55;
-    }
-
-    /* CARDS */
-
-    .stats-grid {
+    /* ── Stats ── */
+    .stats-row {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-bottom: 23px;
+      margin-bottom: 24px;
     }
 
     .stat-card {
+      background: var(--nx-surface);
+      border: 1px solid var(--nx-border);
+      border-radius: var(--nx-radius-xl);
+      padding: 18px 20px;
       display: flex;
       align-items: center;
       gap: 14px;
-      min-height: 104px;
-      padding: 20px;
-      border: 1px solid var(--members-border);
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 3px 12px rgba(16,24,40,.025);
     }
 
     .stat-icon {
+      width: 42px; height: 42px;
+      border-radius: var(--nx-radius-md);
+      background: var(--nx-indigo-50);
+      color: var(--nx-indigo-500);
       display: grid;
-      width: 43px;
-      height: 43px;
-      flex-shrink: 0;
       place-items: center;
-      border-radius: 11px;
-      background: #f5f0e7;
-      color: #9c783c;
-      font-size: 19px;
+      flex-shrink: 0;
     }
 
-    .stat-card:nth-child(2) .stat-icon {
-      background: #eaf5ee;
-      color: #15803d;
-    }
+    .stat-icon svg { width: 18px; height: 18px; }
 
-    .stat-card:nth-child(3) .stat-icon {
-      background: #eef2f8;
-      color: #526580;
-    }
+    .stat-icon.success { background: var(--nx-success-bg); color: var(--nx-success); }
+    .stat-icon.warning { background: var(--nx-warning-bg); color: var(--nx-warning); }
 
-    .stat-label {
-      display: block;
-      margin-bottom: 5px;
-      color: #7b8495;
-      font-size: 11px;
-      font-weight: 500;
-    }
-
+    .stat-text {}
+    .stat-label { font-size: 0.8125rem; color: var(--nx-text-secondary); margin-bottom: 4px; }
     .stat-value {
-      display: block;
-      color: #101828;
-      font-family: "Manrope", sans-serif;
-      font-size: 23px;
+      font-family: var(--nx-font-heading);
+      font-size: 1.5rem;
       font-weight: 800;
+      color: var(--nx-text-primary);
+      line-height: 1;
     }
 
-    /* INVITATION */
-
-    .invite-card {
-      margin-bottom: 23px;
-      padding: 23px;
-      border: 1px solid var(--members-border);
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 3px 12px rgba(16,24,40,.025);
+    /* ── Cards ── */
+    .section-card {
+      background: var(--nx-surface);
+      border: 1px solid var(--nx-border);
+      border-radius: var(--nx-radius-xl);
+      overflow: hidden;
+      margin-bottom: 20px;
     }
 
-    .section-heading {
+    .section-card-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 19px;
+      gap: 16px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--nx-slate-100);
     }
 
-    .section-heading h2 {
-      margin: 0;
-      color: #101828;
-      font-family: "Manrope", sans-serif;
-      font-size: 16px;
-      font-weight: 800;
+    .section-card-header h2 {
+      font-family: var(--nx-font-heading);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--nx-text-primary);
     }
 
-    .section-heading p {
-      margin: 5px 0 0;
-      color: var(--members-muted);
-      font-size: 11px;
-      line-height: 1.6;
+    .section-card-header p {
+      font-size: 0.8125rem;
+      color: var(--nx-text-secondary);
+      margin-top: 2px;
     }
 
+    .section-card-body { padding: 20px 22px; }
+
+    /* ── Invite form ── */
     .invite-form {
       display: grid;
-      grid-template-columns: minmax(180px, 1fr) 180px auto;
+      grid-template-columns: 1fr 200px auto;
       align-items: end;
-      gap: 13px;
+      gap: 14px;
     }
 
-    .form-group {
+    .invite-field {
       display: grid;
       gap: 7px;
-      min-width: 0;
     }
 
-    .form-group label {
-      color: #475467;
-      font-size: 11px;
-      font-weight: 700;
+    .invite-field label {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--nx-slate-700);
     }
 
-    .form-control {
-      width: 100%;
-      min-height: 42px;
-      padding: 0 12px;
-      border: 1px solid #dfe4ec;
-      border-radius: 8px;
-      background: #fff;
-      color: #182230;
-      font-size: 12px;
+    .invite-input,
+    .invite-select {
+      height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--nx-border);
+      border-radius: var(--nx-radius-md);
+      background: var(--nx-surface);
+      color: var(--nx-text-primary);
+      font-size: 0.875rem;
       outline: none;
-      transition: border-color .2s, box-shadow .2s;
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+      width: 100%;
     }
 
-    .form-control::placeholder {
-      color: #a0a8b6;
-    }
+    .invite-input::placeholder { color: var(--nx-slate-400); }
 
-    .form-control:focus {
-      border-color: #c9a96e;
-      box-shadow: 0 0 0 3px rgba(201,169,110,.15);
+    .invite-input:focus,
+    .invite-select:focus {
+      border-color: var(--nx-indigo-400);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
     }
 
     .invite-hint {
-      margin: 14px 0 0;
-      color: #8a93a3;
-      font-size: 10px;
-      line-height: 1.6;
+      margin-top: 12px;
+      font-size: 0.75rem;
+      color: var(--nx-text-muted);
+      line-height: 1.5;
     }
 
-    /* FEEDBACK */
-
-    .feedback {
-      display: none;
-      margin-top: 13px;
-      padding: 11px 13px;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .feedback.show {
-      display: block;
-    }
-
-    .feedback.error {
-      border-color: #fecaca;
-      background: #fef2f2;
-      color: #b91c1c;
-    }
-
-    .feedback.success {
-      border-color: #bbf7d0;
-      background: #f0fdf4;
-      color: #166534;
-    }
-
-    .feedback.info {
-      border-color: #bfdbfe;
-      background: #eff6ff;
-      color: #1d4ed8;
-    }
-
-    /* MEMBERS TABLE */
-
-    .members-card {
-      overflow: hidden;
-      border: 1px solid var(--members-border);
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 3px 12px rgba(16,24,40,.025);
-    }
-
-    .members-card-header {
+    .invite-btn {
+      height: 42px;
+      padding: 0 20px;
+      border: none;
+      border-radius: var(--nx-radius-md);
+      background: var(--nx-indigo-600);
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 21px 23px;
-      border-bottom: 1px solid var(--members-border);
+      gap: 8px;
+      white-space: nowrap;
+      transition: background 200ms ease, box-shadow 200ms ease;
     }
 
-    .members-card-header h2 {
-      margin: 0;
-      color: #101828;
-      font-family: "Manrope", sans-serif;
-      font-size: 15px;
-      font-weight: 800;
+    .invite-btn:hover {
+      background: var(--nx-indigo-700);
+      box-shadow: 0 4px 12px rgba(79,70,229,0.3);
     }
 
-    .members-card-header p {
-      margin: 5px 0 0;
-      color: var(--members-muted);
-      font-size: 11px;
+    .invite-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
     }
 
-    .member-count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 29px;
-      height: 26px;
-      padding: 0 8px;
-      border-radius: 7px;
-      background: #f4f6f9;
-      color: #536075;
-      font-size: 11px;
-      font-weight: 800;
+    /* ── Feedback ── */
+    .feedback {
+      display: none;
+      padding: 10px 14px;
+      border: 1px solid transparent;
+      border-radius: var(--nx-radius-md);
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      margin-top: 14px;
     }
 
-    .table-wrapper {
+    .feedback.show { display: block; }
+
+    .feedback.error   { background: var(--nx-danger-bg);  border-color: var(--nx-danger-border);  color: var(--nx-danger); }
+    .feedback.success { background: var(--nx-success-bg); border-color: var(--nx-success-border); color: var(--nx-success); }
+    .feedback.info    { background: var(--nx-info-bg);    border-color: var(--nx-info-border);    color: var(--nx-info); }
+
+    /* ── Table ── */
+    .table-wrap {
       width: 100%;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .members-table {
       width: 100%;
       border-collapse: collapse;
-      text-align: left;
+    }
+
+    .members-table thead tr {
+      background: var(--nx-slate-50);
+      border-bottom: 1px solid var(--nx-border);
     }
 
     .members-table th {
-      padding: 12px 20px;
-      background: #fafbfc;
-      color: #7d8798;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .7px;
+      padding: 11px 20px;
+      text-align: left;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--nx-slate-500);
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       white-space: nowrap;
     }
 
     .members-table td {
-      padding: 15px 20px;
-      border-top: 1px solid #f0f2f5;
-      color: #344054;
-      font-size: 11px;
+      padding: 14px 20px;
+      color: var(--nx-slate-700);
+      font-size: 0.875rem;
+      border-bottom: 1px solid var(--nx-slate-100);
       vertical-align: middle;
     }
 
-    .members-table tbody tr:hover {
-      background: #fcfcfd;
-    }
+    .members-table tbody tr:last-child td { border-bottom: none; }
+    .members-table tbody tr:hover { background: var(--nx-slate-50); }
 
-    .member-identity {
+    /* Member cell */
+    .member-cell {
       display: flex;
       align-items: center;
-      gap: 10px;
-      min-width: 170px;
+      gap: 12px;
     }
 
     .member-avatar {
-      display: grid;
-      width: 34px;
-      height: 34px;
-      flex-shrink: 0;
-      place-items: center;
+      width: 36px; height: 36px;
       border-radius: 50%;
-      background: #eef1f6;
-      color: #475467;
-      font-size: 11px;
-      font-weight: 800;
+      background: var(--nx-indigo-100);
+      color: var(--nx-indigo-600);
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
-    .member-email {
-      overflow-wrap: anywhere;
-      color: #344054;
-      font-weight: 600;
-    }
+    .member-name { font-weight: 600; color: var(--nx-text-primary); font-size: 0.875rem; }
+    .member-id { font-size: 0.75rem; color: var(--nx-text-muted); font-family: monospace; }
 
+    /* Role badges */
     .role-badge {
       display: inline-flex;
       align-items: center;
-      padding: 5px 9px;
-      border-radius: 20px;
-      background: #f1f3f7;
-      color: #475467;
-      font-size: 10px;
-      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
       white-space: nowrap;
     }
 
-    .role-badge.owner {
-      background: #f8f0df;
-      color: #926c2e;
+    .role-owner   { background: var(--nx-indigo-50);   color: var(--nx-indigo-600); }
+    .role-admin   { background: #eef2ff;                color: #4338ca; }
+    .role-employee{ background: var(--nx-success-bg);   color: var(--nx-success); }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--nx-success);
     }
 
-    .role-badge.admin {
-      background: #eaf0ff;
-      color: #3455a4;
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
     }
 
-    .role-badge.employee {
-      background: #eaf5ee;
-      color: #287a45;
+    /* Member count chip */
+    .count-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 6px;
+      background: var(--nx-slate-100);
+      color: var(--nx-slate-600);
+      font-size: 0.75rem;
+      font-weight: 700;
     }
 
-    .empty-state {
-      padding: 37px 20px;
-      text-align: center;
-      color: #8b95a5;
-      font-size: 12px;
-    }
-
-    .empty-state strong {
-      display: block;
-      margin-bottom: 5px;
-      color: #344054;
-      font-size: 13px;
-    }
-
+    /* Table loading */
     .table-loading {
-      padding: 24px;
-      color: #7b8495;
+      padding: 40px 20px;
       text-align: center;
-      font-size: 12px;
+      color: var(--nx-text-secondary);
+      font-size: 0.875rem;
     }
 
-    /* MOBILE */
-
-    .sidebar-overlay {
-      display: none;
+    /* Empty state */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px;
+      text-align: center;
+      gap: 10px;
     }
 
-    @media (max-width: 1050px) {
-      .content {
-        padding-right: 24px;
-        padding-left: 24px;
-      }
-
-      .topbar {
-        padding: 0 24px;
-      }
-
-      .stats-grid {
-        gap: 11px;
-      }
-
-      .stat-card {
-        padding: 15px;
-      }
+    .empty-icon {
+      width: 46px; height: 46px;
+      border-radius: var(--nx-radius-lg);
+      background: var(--nx-indigo-50);
+      display: grid;
+      place-items: center;
+      color: var(--nx-indigo-400);
     }
 
-    @media (max-width: 760px) {
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform .25s ease;
-      }
+    .empty-icon svg { width: 20px; height: 20px; }
 
-      .sidebar.open {
-        transform: translateX(0);
-      }
+    .empty-title { font-weight: 600; font-size: 0.9375rem; color: var(--nx-text-primary); }
+    .empty-desc { font-size: 0.8125rem; color: var(--nx-text-secondary); max-width: 320px; line-height: 1.6; }
 
-      .sidebar-overlay.open {
-        position: fixed;
-        inset: 0;
-        z-index: 20;
-        display: block;
-        background: rgba(16,24,40,.45);
-      }
-
-      .main {
-        width: 100%;
-        margin-left: 0;
-      }
-
-      .topbar {
-        min-height: 60px;
-        padding: 0 17px;
-      }
-
-      .mobile-menu-button {
-        display: grid;
-        place-items: center;
-      }
-
-      .topbar-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .content {
-        padding: 26px 17px 40px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stat-card {
-        min-height: 82px;
-      }
-
-      .invite-form {
-        grid-template-columns: 1fr;
-      }
-
-      .invite-form .btn {
-        width: 100%;
-      }
-
-      .page-heading {
-        flex-direction: column;
-      }
-
-      .members-table {
-        min-width: 570px;
-      }
+    /* Topbar user chip */
+    .topbar-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.75rem;
+      color: var(--nx-slate-400);
     }
 
-    @media (max-width: 420px) {
-      .content {
-        padding-right: 12px;
-        padding-left: 12px;
-      }
-
-      .invite-card {
-        padding: 17px;
-      }
-
-      .members-card-header {
-        padding: 17px;
-      }
-
-      .topbar-status {
-        font-size: 10px;
-      }
+    .topbar-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--nx-success);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .invite-form { grid-template-columns: 1fr 1fr; }
+      .invite-form .invite-btn { grid-column: 1 / -1; width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .page-header { flex-direction: column; align-items: flex-start; }
+      .invite-form { grid-template-columns: 1fr; }
+      .members-table { min-width: 560px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="app">
+<div class="nx-app">
 
-    <!-- MENU LATÉRAL -->
-    <aside class="sidebar" id="sidebar">
-      <a href="../index.html" class="brand" aria-label="NEXORA, accueil">
-        <span class="brand-logo">N</span>
-        <span class="brand-name">NEX<span>ORA</span></span>
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <aside class="nx-sidebar" id="sidebar" aria-label="Navigation principale">
+
+    <a href="../index.html" class="nx-sidebar-brand" aria-label="Nexora, accueil">
+      <span class="nx-sidebar-brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5l4 0 8 10V5h2v14h-4L6 9v10H4z" fill="white"/></svg>
+      </span>
+      <span class="nx-sidebar-brand-name">NEX<span>ORA</span></span>
+    </a>
+
+    <p class="nx-sidebar-section">Espace de travail</p>
+
+    <nav class="nx-sidebar-nav">
+      <a href="dashboard.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/></svg>
+        </span>
+        Tableau de bord
+      </a>
+      <a href="membres.html" class="nx-nav-link active" aria-current="page">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM18 17a6 6 0 1 0-12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        Membres
+      </a>
+      <a href="produits.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        </span>
+        Produits
+      </a>
+      <a href="stocks.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M3 14l4-4 4 4 6-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Stocks
       </a>
 
-      <p class="nav-label">Espace de travail</p>
+      <!-- Modules à venir — href="#" intentionnel -->
+      <a href="clients.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM4 17a6 6 0 0 1 12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        Clients
+      </a>
 
-      <nav class="sidebar-nav" aria-label="Navigation principale">
-        <a href="dashboard.html" class="nav-link">
-          <span class="nav-icon" aria-hidden="true">▦</span>
-          <span>Tableau de bord</span>
-        </a>
+      <a href="fournisseurs.html" class="nx-nav-link">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M3 8l7-5 7 5v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 18V12h4v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Fournisseurs
+      </a>
 
-        <a href="membres.html" class="nav-link active" aria-current="page">
-          <span class="nav-icon" aria-hidden="true">♙</span>
-          <span>Membres</span>
-        </a>
-      </nav>
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:0.4;cursor:not-allowed;">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M3 10h14M10 3l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Ventes
+      </a>
 
-      <div class="sidebar-bottom">
-        <div class="sidebar-help">
-          <strong>Besoin d'aide ?</strong>
-          <p>Votre espace de gestion NEXORA est en cours de développement.</p>
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:0.4;cursor:not-allowed;">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10h6M7 7h6M7 13h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </span>
+        Finances
+      </a>
+
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:0.4;cursor:not-allowed;">
+        <span class="nx-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        Paramètres
+      </a>
+    </nav>
+
+    <div class="nx-sidebar-bottom">
+      <div class="nx-user-row">
+        <span class="nx-avatar" id="userAvatar" aria-hidden="true">N</span>
+        <div class="nx-user-info">
+          <span class="nx-user-name" id="userName">Chargement...</span>
+          <span class="nx-user-role" id="companyName">Organisation</span>
         </div>
-
-        <div class="user-panel">
-          <div class="user-avatar" id="userAvatar" aria-hidden="true">N</div>
-          <div class="user-details">
-            <strong id="userName">Chargement...</strong>
-            <span id="companyName">Organisation</span>
-          </div>
-          <button
-            class="logout-button"
-            id="logoutButton"
-            type="button"
-            aria-label="Se déconnecter"
-            title="Se déconnecter"
-          >↪</button>
-        </div>
+        <button class="nx-logout-btn" id="logoutButton" type="button" aria-label="Se déconnecter" title="Se déconnecter">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-    </aside>
+    </div>
 
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  </aside>
 
-    <!-- CONTENU PRINCIPAL -->
-    <main class="main">
-      <header class="topbar">
-        <div class="topbar-left">
-          <button
-            type="button"
-            class="mobile-menu-button"
-            id="mobileMenuButton"
-            aria-label="Ouvrir le menu"
-            aria-controls="sidebar"
-            aria-expanded="false"
-          >☰</button>
+  <div class="nx-sidebar-overlay" id="sidebarOverlay"></div>
 
-          <div class="breadcrumb">
-            NEXORA <span aria-hidden="true">/</span>
-            <strong>Membres</strong>
+  <!-- ══════════ MAIN ══════════ -->
+  <main class="nx-main">
+
+    <!-- Topbar -->
+    <header class="nx-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="nx-mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <nav aria-label="Fil d'Ariane" style="font-size:0.8125rem;color:var(--nx-slate-400);">
+          <span>Nexora</span>
+          <span aria-hidden="true" style="margin:0 6px;">/</span>
+          <strong style="color:var(--nx-text-primary);">Membres</strong>
+        </nav>
+      </div>
+
+      <div class="topbar-status">
+        <span class="topbar-dot" aria-hidden="true"></span>
+        Espace sécurisé
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="nx-page-content">
+
+      <!-- Header -->
+      <div class="page-header">
+        <div>
+          <p class="page-eyebrow">Administration</p>
+          <h1 class="page-title">Membres</h1>
+          <p class="page-desc">Gérez les personnes qui ont accès à votre organisation et contrôlez leurs autorisations.</p>
+          <div class="org-label">
+            Organisation :
+            <strong id="organizationName">Chargement...</strong>
           </div>
         </div>
+        <a href="dashboard.html" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border:1px solid var(--nx-border);border-radius:var(--nx-radius-md);font-size:0.8125rem;font-weight:600;color:var(--nx-slate-700);text-decoration:none;background:var(--nx-surface);white-space:nowrap;transition:border-color 180ms,background 180ms;" onmouseover="this.style.background='var(--nx-slate-50)'" onmouseout="this.style.background='var(--nx-surface)'">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M8 13L3 8l5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Tableau de bord
+        </a>
+      </div>
 
-        <div class="topbar-right">
-          <span class="topbar-status">
-            <span class="status-dot"></span>
-            Espace sécurisé
+      <!-- Stats -->
+      <div class="stats-row">
+        <article class="stat-card">
+          <span class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>
           </span>
-        </div>
-      </header>
+          <div class="stat-text">
+            <p class="stat-label">Membres</p>
+            <p class="stat-value" id="memberCount">—</p>
+          </div>
+        </article>
 
-      <div class="content">
+        <article class="stat-card">
+          <span class="stat-icon success" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="stat-text">
+            <p class="stat-label">Statut</p>
+            <p class="stat-value" style="font-size:1.125rem;">Actif</p>
+          </div>
+        </article>
 
-        <!-- EN-TÊTE -->
-        <section class="page-heading">
+        <article class="stat-card">
+          <span class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <div class="stat-text">
+            <p class="stat-label">Gestion des accès</p>
+            <p class="stat-value" style="font-size:1.125rem;">Sécurisée</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Invitation -->
+      <section class="section-card" aria-labelledby="inviteTitle" id="inviteForm" hidden>
+        <div class="section-card-header">
           <div>
-            <div class="eyebrow">Administration</div>
-            <h1>Gestion des membres</h1>
-            <p class="page-description">
-              Gérez les personnes qui ont accès à votre organisation
-              et contrôlez leurs niveaux d'autorisation.
-            </p>
-            <div class="organization-label">
-              Organisation :
-              <span id="organizationName">Chargement...</span>
-            </div>
+            <h2 id="inviteTitle">Inviter un collaborateur</h2>
+            <p>Ajoutez un membre à votre organisation par e-mail.</p>
           </div>
-
-          <a href="dashboard.html" class="btn btn-primary">
-            <span aria-hidden="true">←</span>
-            Tableau de bord
-          </a>
-        </section>
-
-        <!-- INDICATEURS -->
-        <section class="stats-grid" aria-label="Statistiques des membres">
-          <article class="stat-card">
-            <div class="stat-icon" aria-hidden="true">♙</div>
-            <div>
-              <span class="stat-label">Membres</span>
-              <strong class="stat-value" id="memberCount">—</strong>
-            </div>
-          </article>
-
-          <article class="stat-card">
-            <div class="stat-icon" aria-hidden="true">✓</div>
-            <div>
-              <span class="stat-label">Statut de l'espace</span>
-              <strong class="stat-value" style="font-size:17px">Actif</strong>
-            </div>
-          </article>
-
-          <article class="stat-card">
-            <div class="stat-icon" aria-hidden="true">⌘</div>
-            <div>
-              <span class="stat-label">Gestion des accès</span>
-              <strong class="stat-value" style="font-size:17px">Sécurisée</strong>
-            </div>
-          </article>
-        </section>
-
-        <!-- INVITATION -->
-        <section class="invite-card" aria-labelledby="inviteTitle">
-          <div class="section-heading">
-            <div>
-              <h2 id="inviteTitle">Inviter un collaborateur</h2>
-              <p>Ajoutez un membre à votre organisation par e-mail.</p>
-            </div>
-          </div>
-
-          <form class="invite-form" id="inviteForm">
-            <div class="form-group">
+        </div>
+        <div class="section-card-body">
+          <form class="invite-form" id="inviteFormEl">
+            <div class="invite-field">
               <label for="inviteEmail">Adresse e-mail</label>
-              <input
-                class="form-control"
-                type="email"
-                id="inviteEmail"
-                name="email"
-                placeholder="nom@entreprise.com"
-                autocomplete="email"
-                required
-              >
+              <input class="invite-input" type="email" id="inviteEmail" name="email" placeholder="nom@entreprise.com" autocomplete="email" required>
             </div>
-
-            <div class="form-group">
+            <div class="invite-field">
               <label for="inviteRole">Rôle</label>
-              <select
-                class="form-control"
-                id="inviteRole"
-                name="role"
-                required
-              >
+              <select class="invite-select" id="inviteRole" name="role" required>
                 <option value="employee">Employé</option>
                 <option value="admin">Administrateur</option>
               </select>
             </div>
-
-            <button
-              type="submit"
-              class="btn btn-primary"
-              id="inviteButton"
-            >
-              <span aria-hidden="true">＋</span>
+            <button type="submit" class="invite-btn" id="inviteButton">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
               Envoyer l'invitation
             </button>
           </form>
+          <p class="invite-hint">Les autorisations dépendent du rôle attribué. Vérifiez le rôle avant d'envoyer une invitation.</p>
+          <div class="feedback" id="inviteFeedback" role="status" aria-live="polite"></div>
+        </div>
+      </section>
 
-          <p class="invite-hint">
-            Les autorisations dépendent du rôle attribué. Vérifiez le rôle
-            avant d'envoyer une invitation.
-          </p>
-
-          <div
-            class="feedback"
-            id="inviteFeedback"
-            role="status"
-            aria-live="polite"
-          ></div>
-        </section>
-
-        <!-- LISTE DES MEMBRES -->
-        <section class="members-card" aria-labelledby="membersTitle">
-          <div class="members-card-header">
-            <div>
-              <h2 id="membersTitle">Membres de l'organisation</h2>
-              <p>Consultez les personnes associées à votre espace.</p>
-            </div>
-
-            <span class="member-count" id="memberCountBadge">—</span>
+      <!-- Membres -->
+      <section class="section-card" aria-labelledby="membersTitle">
+        <div class="section-card-header">
+          <div>
+            <h2 id="membersTitle">Membres de l'organisation</h2>
+            <p>Consultez les personnes associées à votre espace.</p>
           </div>
+          <span class="count-chip" id="memberCount">—</span>
+          <span class="count-chip" id="memberCountBadge" style="display:none;">—</span>
+        </div>
 
-          <div class="table-wrapper">
-            <table class="members-table">
-              <thead>
-                <tr>
-                  <th scope="col">Membre</th>
-                  <th scope="col">Identifiant</th>
-                  <th scope="col">Rôle</th>
-                  <th scope="col">Date d'ajout</th>
-                </tr>
-              </thead>
+        <div class="table-wrap">
+          <table class="members-table">
+            <thead>
+              <tr>
+                <th scope="col">Membre</th>
+                <th scope="col">Identifiant</th>
+                <th scope="col">Rôle</th>
+                <th scope="col">Date d'ajout</th>
+                <th scope="col">Statut</th>
+              </tr>
+            </thead>
+            <tbody id="membersTableBody">
+              <tr>
+                <td colspan="5">
+                  <div class="table-loading">Chargement des membres...</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-              <tbody id="membersTableBody">
-                <tr>
-                  <td colspan="4">
-                    <div class="table-loading">
-                      Chargement des membres...
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="feedback" id="errorMessage" role="alert" aria-live="assertive" style="margin: 0 22px 16px;"></div>
+        <div class="feedback" id="infoMessage" role="status" aria-live="polite" style="margin: 0 22px 16px;"></div>
+      </section>
 
-          <div
-            class="feedback"
-            id="errorMessage"
-            role="alert"
-            aria-live="assertive"
-          ></div>
+    </div>
+  </main>
 
-          <div
-            class="feedback"
-            id="infoMessage"
-            role="status"
-            aria-live="polite"
-          ></div>
-        </section>
+</div>
 
-      </div>
-    </main>
-  </div>
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const menuBtn = document.getElementById('mobileMenuBtn');
 
-  <!-- MENU MOBILE -->
-  <script>
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("sidebarOverlay");
-    const menuButton = document.getElementById("mobileMenuButton");
+  function toggleSidebar(open) {
+    sidebar.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+  }
 
-    function closeMobileMenu() {
-      sidebar.classList.remove("open");
-      overlay.classList.remove("open");
-      menuButton.setAttribute("aria-expanded", "false");
-    }
+  menuBtn.addEventListener('click', () => toggleSidebar(!sidebar.classList.contains('open')));
+  overlay.addEventListener('click', () => toggleSidebar(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleSidebar(false); });
+  sidebar.querySelectorAll('.nx-nav-link').forEach(l => l.addEventListener('click', () => toggleSidebar(false)));
+</script>
 
-    menuButton.addEventListener("click", () => {
-      const isOpen = sidebar.classList.toggle("open");
-      overlay.classList.toggle("open", isOpen);
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    overlay.addEventListener("click", closeMobileMenu);
-
-    document.querySelectorAll(".sidebar-nav a").forEach((link) => {
-      link.addEventListener("click", closeMobileMenu);
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeMobileMenu();
-      }
-    });
-  </script>
-
-  <!-- LOGIQUE MÉTIER -->
-  <script type="module" src="../js/core/membres.js"></script>
+<script type="module" src="../js/core/membres.js"></script>
 </body>
 </html>

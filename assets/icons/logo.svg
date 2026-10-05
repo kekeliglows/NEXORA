@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none" role="img" aria-label="Nexora">
+  <!-- Icône -->
+  <rect width="48" height="48" rx="12" fill="#6366F1"/>
+  <path d="M13 35V13l8 0 10 14.5V13h4v22h-8L17 20.5V35H13z" fill="white"/>
+  <!-- Texte NEXORA -->
+  <text x="60" y="34" font-family="'Inter','DM Sans',sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5" fill="#0F1117">NEX</text>
+  <text x="106" y="34" font-family="'Inter','DM Sans',sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5" fill="#6366F1">ORA</text>
+</svg>

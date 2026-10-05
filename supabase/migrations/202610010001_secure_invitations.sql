@@ -78,6 +78,8 @@ FROM anon, authenticated;
 
 -- 4. FONCTION D'ACCEPTATION
 
+DROP FUNCTION IF EXISTS public.accept_organization_invitation(UUID);
+
 CREATE OR REPLACE FUNCTION public.accept_organization_invitation(
     p_invitation_id UUID
 )

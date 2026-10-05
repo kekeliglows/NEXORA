@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow"><title>Clients — Nexora</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <style>
+    body{background:var(--nx-slate-50);}
+    .ph{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px;}
+    .ptitle{font-family:var(--nx-font-heading);font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:800;letter-spacing:-.025em;color:var(--nx-text-primary);margin-bottom:4px;}
+    .pdesc{font-size:.875rem;color:var(--nx-text-secondary);}
+    .ab{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border:none;border-radius:var(--nx-radius-md);background:var(--nx-indigo-600);color:#fff;font-size:.875rem;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;}
+    .ab:hover{background:var(--nx-indigo-700);}
+    .sr{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+    .sc{background:var(--nx-surface);border:1px solid var(--nx-border);border-radius:var(--nx-radius-xl);padding:20px 22px;display:flex;align-items:center;gap:14px;}
+    .si{width:40px;height:40px;border-radius:var(--nx-radius-md);background:var(--nx-indigo-50);color:var(--nx-indigo-500);display:grid;place-items:center;flex-shrink:0;}
+    .si svg{width:18px;height:18px;}
+    .sl{font-size:.8125rem;color:var(--nx-text-secondary);margin-bottom:4px;}
+    .sv{font-family:var(--nx-font-heading);font-size:1.5rem;font-weight:800;color:var(--nx-text-primary);line-height:1;}
+    .tb{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+    .sw{position:relative;flex:1;min-width:220px;}
+    .si2{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--nx-slate-400);pointer-events:none;}
+    .si2 svg{width:15px;height:15px;}
+    .sin{width:100%;height:40px;padding:0 14px 0 38px;border:1px solid var(--nx-border);border-radius:var(--nx-radius-md);background:var(--nx-surface);color:var(--nx-text-primary);font-size:.875rem;font-family:inherit;outline:none;}
+    .sin::placeholder{color:var(--nx-slate-400);}
+    .sin:focus{border-color:var(--nx-indigo-400);box-shadow:0 0 0 3px rgba(99,102,241,.15);}
+    .fs{height:40px;padding:0 14px;border:1px solid var(--nx-border);border-radius:var(--nx-radius-md);background:var(--nx-surface);color:var(--nx-text-primary);font-size:.875rem;font-family:inherit;outline:none;cursor:pointer;}
+    .fb{display:none;padding:12px 16px;border:1px solid transparent;border-radius:var(--nx-radius-md);font-size:.875rem;margin-bottom:18px;}
+    .fb.success{display:block;background:var(--nx-success-bg);border-color:var(--nx-success-border);color:var(--nx-success);}
+    .fb.error{display:block;background:var(--nx-danger-bg);border-color:var(--nx-danger-border);color:var(--nx-danger);}
+    .tc{background:var(--nx-surface);border:1px solid var(--nx-border);border-radius:var(--nx-radius-xl);overflow:hidden;}
+    .tw{width:100%;overflow-x:auto;}
+    .dt{width:100%;border-collapse:collapse;min-width:700px;}
+    .dt thead tr{background:var(--nx-slate-50);border-bottom:1px solid var(--nx-border);}
+    .dt th{padding:12px 18px;text-align:left;font-size:.6875rem;font-weight:700;color:var(--nx-slate-500);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;}
+    .dt td{padding:14px 18px;color:var(--nx-slate-700);font-size:.875rem;border-bottom:1px solid var(--nx-slate-100);vertical-align:middle;}
+    .dt tbody tr:last-child td{border-bottom:none;}
+    .dt tbody tr:hover{background:var(--nx-slate-50);}
+    .in{font-weight:600;color:var(--nx-text-primary);display:block;}
+    .im{font-size:.75rem;color:var(--nx-text-muted);margin-top:2px;display:block;}
+    .lk{color:var(--nx-indigo-600);text-decoration:none;}
+    .lk:hover{text-decoration:underline;}
+    .badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:.75rem;font-weight:600;}
+    .badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .ba{background:var(--nx-success-bg);color:var(--nx-success);}
+    .bi{background:var(--nx-slate-100);color:var(--nx-slate-500);}
+    .ac{display:flex;gap:6px;}
+    .abt{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--nx-border);border-radius:var(--nx-radius-sm);background:var(--nx-surface);color:var(--nx-slate-500);font-size:15px;cursor:pointer;font-family:inherit;}
+    .abt:hover{background:var(--nx-slate-50);color:var(--nx-slate-800);}
+    .es{display:flex;flex-direction:column;align-items:center;padding:60px 20px;text-align:center;gap:10px;}
+    .et{font-weight:600;font-size:.9375rem;color:var(--nx-text-primary);margin:0;}
+    .ed{font-size:.8125rem;color:var(--nx-text-secondary);max-width:300px;line-height:1.6;margin:0;}
+    .mb{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);}
+    .mb.open{display:flex;}
+    .mo{width:100%;max-width:600px;max-height:90dvh;overflow-y:auto;background:var(--nx-surface);border-radius:var(--nx-radius-2xl);box-shadow:var(--nx-shadow-2xl);}
+    .mh{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--nx-border);}
+    .mh h2{font-family:var(--nx-font-heading);font-size:1.0625rem;font-weight:700;color:var(--nx-text-primary);margin:0;}
+    .cbtn{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--nx-border);border-radius:var(--nx-radius-md);background:transparent;color:var(--nx-slate-500);cursor:pointer;font-size:20px;font-family:inherit;}
+    .cbtn:hover{background:var(--nx-slate-50);}
+    .mbody{padding:24px;}
+    .fst{font-size:.6875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nx-indigo-500);margin-bottom:14px;}
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+    .fgp{display:flex;flex-direction:column;gap:6px;}
+    .fgp.full{grid-column:1/-1;}
+    .fgp label{font-size:.8125rem;font-weight:500;color:var(--nx-slate-700);}
+    .fgp input,.fgp textarea{width:100%;box-sizing:border-box;height:42px;padding:0 14px;border:1px solid var(--nx-border);border-radius:var(--nx-radius-md);background:var(--nx-surface);color:var(--nx-text-primary);font-size:.875rem;font-family:inherit;outline:none;}
+    .fgp textarea{height:auto;min-height:80px;padding-top:10px;resize:vertical;}
+    .fgp input:focus,.fgp textarea:focus{border-color:var(--nx-indigo-400);box-shadow:0 0 0 3px rgba(99,102,241,.15);}
+    .mf{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--nx-border);}
+    .bcl{height:38px;padding:0 18px;border:1px solid var(--nx-border);border-radius:var(--nx-radius-md);background:var(--nx-surface);color:var(--nx-slate-700);font-size:.875rem;font-weight:600;font-family:inherit;cursor:pointer;}
+    .bcl:hover{background:var(--nx-slate-50);}
+    .bsv{height:38px;padding:0 22px;border:none;border-radius:var(--nx-radius-md);background:var(--nx-indigo-600);color:#fff;font-size:.875rem;font-weight:600;font-family:inherit;cursor:pointer;}
+    .bsv:hover{background:var(--nx-indigo-700);}
+    .bsv:disabled{opacity:.5;cursor:not-allowed;}
+    .ts{display:flex;align-items:center;gap:7px;font-size:.75rem;color:var(--nx-slate-400);}
+    .td{width:6px;height:6px;border-radius:50%;background:var(--nx-success);}
+    @media(max-width:768px){.sr{grid-template-columns:1fr;}.ph{flex-direction:column;align-items:flex-start;}.ab{width:100%;justify-content:center;}.fg{grid-template-columns:1fr;}.fgp.full{grid-column:auto;}}
+  </style>
+</head>
+<body>
+<div class="nx-app">
+
+  <!-- SIDEBAR -->
+  <aside class="nx-sidebar" id="sidebar" aria-label="Navigation principale">
+    <a href="../index.html" class="nx-sidebar-brand"><span class="nx-sidebar-brand-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5l4 0 8 10V5h2v14h-4L6 9v10H4z" fill="white"/></svg></span><span class="nx-sidebar-brand-name">NEX<span>ORA</span></span></a>
+    <p class="nx-sidebar-section">Espace de travail</p>
+    <nav class="nx-sidebar-nav">
+      <a href="dashboard.html"    class="nx-nav-link"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/></svg></span>Tableau de bord</a>
+      <a href="membres.html"      class="nx-nav-link"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM18 17a6 6 0 1 0-12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>Membres</a>
+      <a href="produits.html"     class="nx-nav-link"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg></span>Produits</a>
+      <a href="stocks.html"       class="nx-nav-link"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M3 14l4-4 4 4 6-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Stocks</a>
+      <a href="clients.html"      class="nx-nav-link active" aria-current="page"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM4 17a6 6 0 0 1 12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>Clients</a>
+      <a href="fournisseurs.html" class="nx-nav-link"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M3 8l7-5 7 5v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 18V12h4v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Fournisseurs</a>
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:.4;cursor:not-allowed;"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M3 10h14M10 3l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ventes</a>
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:.4;cursor:not-allowed;"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10h6M7 7h6M7 13h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>Finances</a>
+      <a href="#" class="nx-nav-link" aria-disabled="true" tabindex="-1" style="opacity:.4;cursor:not-allowed;"><span class="nx-nav-icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>Paramètres</a>
+    </nav>
+    <div class="nx-sidebar-bottom">
+      <div class="nx-user-row">
+        <span class="nx-avatar" id="userAvatar">N</span>
+        <div class="nx-user-info"><span class="nx-user-name" id="userName">Chargement...</span><span class="nx-user-role" id="companyName">Organisation</span></div>
+        <button class="nx-logout-btn" id="logoutButton" type="button" aria-label="Se déconnecter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </aside>
+  <div class="nx-sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN -->
+  <main class="nx-main">
+    <header class="nx-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="nx-mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <nav aria-label="Fil d'Ariane" style="font-size:.8125rem;color:var(--nx-slate-400);"><span>Nexora</span><span style="margin:0 6px;">/</span><strong style="color:var(--nx-text-primary);">Clients</strong></nav>
+      </div>
+      <div class="ts"><span class="td"></span>Espace sécurisé</div>
+    </header>
+
+    <div class="nx-page-content">
+      <!-- En-tête -->
+      <div class="ph">
+        <div><h1 class="ptitle">Clients</h1><p class="pdesc">Gérez votre portefeuille clients et leurs coordonnées.</p></div>
+        <button type="button" class="ab" id="addCustomerButton"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>Ajouter un client</button>
+      </div>
+
+      <div id="feedback" class="fb" role="status" aria-live="polite"></div>
+
+      <!-- Stats -->
+      <div class="sr">
+        <article class="sc"><span class="si"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg></span><div><p class="sl">Total clients</p><p class="sv" id="totalCustomers">—</p></div></article>
+        <article class="sc"><span class="si" style="background:var(--nx-success-bg);color:var(--nx-success);"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><p class="sl">Clients actifs</p><p class="sv" id="activeCustomers">—</p></div></article>
+        <article class="sc"><span class="si"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><p class="sl">Catégories</p><p class="sv" id="totalCategories">—</p></div></article>
+      </div>
+
+      <!-- Toolbar -->
+      <section class="tb" aria-label="Filtres">
+        <div class="sw"><span class="si2"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><input type="search" id="searchInput" class="sin" placeholder="Rechercher un client..." autocomplete="off"></div>
+        <select id="statusFilter" class="fs"><option value="all">Tous les statuts</option><option value="active">Actifs</option><option value="inactive">Inactifs</option></select>
+        <select id="categoryFilter" class="fs"><option value="all">Toutes catégories</option></select>
+      </section>
+
+      <!-- Tableau -->
+      <div class="tc"><div class="tw">
+        <table class="dt">
+          <thead><tr><th>Client</th><th>E-mail</th><th>Téléphone</th><th>Ville / Pays</th><th>Statut</th><th>Ajouté le</th><th>Actions</th></tr></thead>
+          <tbody id="customersTableBody">
+            <tr><td colspan="7"><div class="es"><p class="et">Chargement des clients...</p></div></td></tr>
+          </tbody>
+        </table>
+      </div></div>
+    </div>
+  </main>
+</div>
+
+<!-- MODAL CLIENT -->
+<div class="mb" id="customerModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="mo">
+    <div class="mh"><h2 id="modalTitle">Ajouter un client</h2><button type="button" class="cbtn" id="closeModalButton" aria-label="Fermer">×</button></div>
+    <form id="customerForm">
+      <div class="mbody">
+        <p class="fst">Informations principales</p>
+        <div class="fg">
+          <div class="fgp full"><label for="customerName">Nom *</label><input type="text" id="customerName" maxlength="200" placeholder="Nom du client" required></div>
+          <div class="fgp"><label for="customerEmail">E-mail</label><input type="email" id="customerEmail" maxlength="254" placeholder="email@exemple.com"></div>
+          <div class="fgp"><label for="customerPhone">Téléphone</label><input type="tel" id="customerPhone" maxlength="30" placeholder="+33 6 00 00 00 00"></div>
+          <div class="fgp"><label for="customerCategory">Catégorie</label><input type="text" id="customerCategory" maxlength="100" placeholder="Ex. : Particulier, Pro…"></div>
+          <div class="fgp"><label for="customerTax">N° TVA / SIRET</label><input type="text" id="customerTax" maxlength="50"></div>
+        </div>
+        <p class="fst">Adresse</p>
+        <div class="fg">
+          <div class="fgp full"><label for="customerAddress">Adresse</label><input type="text" id="customerAddress" maxlength="200" placeholder="Rue, numéro…"></div>
+          <div class="fgp"><label for="customerCity">Ville</label><input type="text" id="customerCity" maxlength="100"></div>
+          <div class="fgp"><label for="customerCountry">Pays</label><input type="text" id="customerCountry" maxlength="100" placeholder="France"></div>
+        </div>
+        <p class="fst">Notes</p>
+        <div class="fg">
+          <div class="fgp full"><label for="customerNotes">Notes internes</label><textarea id="customerNotes" maxlength="1000" placeholder="Informations complémentaires…"></textarea></div>
+        </div>
+        <input type="hidden" id="customerId">
+      </div>
+      <div class="mf"><button type="button" class="bcl" id="cancelButton">Annuler</button><button type="submit" class="bsv" id="saveButton">Enregistrer</button></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const sb = document.getElementById('sidebar'), ov = document.getElementById('sidebarOverlay'), mb = document.getElementById('mobileMenuBtn');
+  function tog(o){sb.classList.toggle('open',o);ov.classList.toggle('open',o);mb.setAttribute('aria-expanded',String(o));}
+  mb.addEventListener('click',()=>tog(!sb.classList.contains('open')));
+  ov.addEventListener('click',()=>tog(false));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')tog(false);});
+  sb.querySelectorAll('.nx-nav-link').forEach(l=>l.addEventListener('click',()=>tog(false)));
+</script>
+<script type="module" src="../js/core/clients.js"></script>
+</body>
+</html>
